@@ -1,0 +1,2 @@
+id,label,latitude,longitude,texture,argile,calcaire,matiere_organique,ph,structure,erosion,hydromorphie
+PED_01,Prelevement pedologique,48.52132,6.46585,Sable grossier (sol rugueux),< 10 %,< 5 %,~9 % (sol humifere),"4,5 - 5 (sol acide)",Particulaire,Presence de rigoles,"Sol redoxique : taches rouge orange, alternance de zones de saturation"

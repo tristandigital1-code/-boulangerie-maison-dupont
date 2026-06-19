@@ -1,0 +1,9 @@
+id,numero,latitude,longitude,presence,espece,comportement,signes_occupation,etat_nichoir,remarques
+NIC_01,1,48.52212,6.46739,oui,Mesange charbonniere,Chant pour delimiter son territoire,Presence d'un nid,Tres bon,Fauvette a tete noire et Pouillot veloce aux alentours
+NIC_03,3,48.52096,6.46637,oui,Fauvette des jardins,Chant,Element (branche) present dans le nid,Tres bon,Troglodyte mignon aux environs
+NIC_04,4,48.52142,6.46628,non,,Aucun,Aucun,Bon,
+NIC_05,5,48.52190,6.46689,non,,Aucun,Presence de fientes,Bon,Mesange charbonniere a proximite
+NIC_06,6,48.52111,6.46568,oui,Mesange charbonniere,Va-et-vient a l'interieur du nid (nourrissage probable),Activite parentale,Bon,Fauvette a tete noire a proximite
+NIC_07,7,48.52218,6.46587,non,,Aucun,Aucun,Tres bon,"Pouillot fitis, Rossignol philomele, Fauvette a tete noire aux alentours"
+NIC_08,8,48.52131,6.46589,oui,Fauvette a tete noire,Passage silencieux,Aucun signe particulier,Bon,Cigogne blanche observee en vol
+NIC_09,9,48.52199,6.46631,non,,Aucun,Aucun,Tres bon,Pipit des arbres a proximite
