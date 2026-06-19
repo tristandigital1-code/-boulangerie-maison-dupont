@@ -729,7 +729,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 <header>
   <h1>Étude ornithologique &amp; pédologique — Xermaménil (54)</h1>
-  <p>BTS GPN — CCF — Nichoirs (présence/absence) et point de prélèvement pédologique · fond de carte Géoportail (IGN)</p>
+  <p>BTS GPN — CCF — Nichoirs (présence/absence) et point de prélèvement pédologique · vue satellite Géoportail (IGN)</p>
 </header>
 
 <div id="map"></div>
@@ -789,24 +789,23 @@ let addMode = false;
 
 const map = L.map('map', {zoomControl:true}).setView([48.5215, 6.4665], 17);
 
-const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom:19, attribution:'&copy; OpenStreetMap contributors'
-}).addTo(map);
-
 // Couches Géoportail (IGN) — service public, sans clé API requise.
+const ignOrtho = L.tileLayer(
+  'https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&FORMAT=image/jpeg&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}',
+  {maxZoom:19, minZoom:0, attribution:'IGN-F/Géoportail'}
+).addTo(map);
 const ignPlan = L.tileLayer(
   'https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&STYLE=normal&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}',
   {maxZoom:19, minZoom:0, attribution:'IGN-F/Géoportail'}
 );
-const ignOrtho = L.tileLayer(
-  'https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&FORMAT=image/jpeg&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}',
-  {maxZoom:19, minZoom:0, attribution:'IGN-F/Géoportail'}
-);
+const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom:19, attribution:'&copy; OpenStreetMap contributors'
+});
 
 L.control.layers({
-  'Fond OpenStreetMap': osm,
+  'Photos aériennes IGN (Géoportail)': ignOrtho,
   'Plan IGN (Géoportail)': ignPlan,
-  'Photos aériennes IGN (Géoportail)': ignOrtho
+  'Fond OpenStreetMap (secours)': osm
 }, {}, {position:'topright'}).addTo(map);
 
 function colorFor(p){
