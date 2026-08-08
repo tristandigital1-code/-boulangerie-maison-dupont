@@ -1,0 +1,181 @@
+{
+  "system": {
+    "name": "Transformation 4 Semaines",
+    "version": "1.0.0",
+    "description": "Système de transformation basé sur les sciences du comportement (17 sources)",
+    "duration_weeks": 4,
+    "full_automaticity_months": "2-3",
+    "sources_count": 17
+  },
+  "habits": [
+    {
+      "id": 1,
+      "name": "Identité",
+      "category": "matin",
+      "reminder_time": "08:00",
+      "source": "James Clear (Atomic Habits)",
+      "description": "Écris une phrase d'identité + 1 intention.",
+      "pourquoi": "James Clear a dit : 'Every action you take is a vote for the type of person you wish to become.'",
+      "exemple": "Je suis ce type de personne. C'est normal pour moi de faire 1 action business/jour.",
+      "icon": "🪞",
+      "color": "#6366F1"
+    },
+    {
+      "id": 2,
+      "name": "Corps",
+      "category": "matin",
+      "reminder_time": "08:00",
+      "source": "BJ Fogg (Tiny Habits), CDC",
+      "description": "Circuit 3 tours OU minimum vital (10 squats + 5 pompes + 20s gainage).",
+      "pourquoi": "BJ Fogg a dit que les petites actions répétées deviennent automatiques.",
+      "icon": "💪",
+      "color": "#EF4444"
+    },
+    {
+      "id": 3,
+      "name": "Image",
+      "category": "matin",
+      "reminder_time": "08:00",
+      "source": "Amy Cuddy (TED, posture)",
+      "description": "Visage + dents + déo + vêtements propres.",
+      "pourquoi": "Amy Cuddy a dit que la posture et l'apparence changent ta présence.",
+      "icon": "👔",
+      "color": "#F59E0B"
+    },
+    {
+      "id": 4,
+      "name": "Anti-école",
+      "category": "matin",
+      "reminder_time": "07:30",
+      "source": "Harvard Study, Stanford Lab",
+      "description": "1 respiration 4-6 + phrase 'Je ne suis pas là pour être comme eux.'",
+      "pourquoi": "Harvard a dit que la règle des 3 secondes coupe l'impulsivité. Stanford a dit que les cues déclenchent les habitudes.",
+      "icon": "🛡️",
+      "color": "#8B5CF6"
+    },
+    {
+      "id": 5,
+      "name": "Business",
+      "category": "midi",
+      "reminder_time": "12:00",
+      "source": "Cal Newport (Deep Work), Tim Ferriss",
+      "description": "1 action business (message, relance, test d'offre).",
+      "pourquoi": "Cal Newport a dit que le travail profond et régulier est plus efficace que le 'busy work'.",
+      "icon": "💼",
+      "color": "#10B981"
+    },
+    {
+      "id": 6,
+      "name": "Environnement",
+      "category": "midi",
+      "reminder_time": "12:00",
+      "source": "Stanford Behavior Design Lab",
+      "description": "1 micro-action environnement (1 objet à sa place, 1 notification supprimée).",
+      "pourquoi": "Stanford a dit que l'environnement et les cues déclenchent les habitudes.",
+      "icon": "🏠",
+      "color": "#06B6D4"
+    },
+    {
+      "id": 7,
+      "name": "Mental",
+      "category": "soir",
+      "reminder_time": "20:00",
+      "source": "Huberman Lab, Joe Dispenza",
+      "description": "1 note de réaction/émotion (ex: 'Aujourd'hui j'ai évité de justifier').",
+      "pourquoi": "Huberman a dit que la réflexion consolide l'apprentissage. Dispenza a dit que la neuroplasticité permet de changer les habitudes.",
+      "icon": "🧠",
+      "color": "#EC4899"
+    },
+    {
+      "id": 8,
+      "name": "Sommeil",
+      "category": "soir",
+      "reminder_time": "20:00",
+      "source": "CDC, Sleep Foundation",
+      "description": "7h minimum + écrans réduits 30min avant.",
+      "pourquoi": "CDC a dit que 7h de sommeil minimum est crucial pour la santé.",
+      "icon": "😴",
+      "color": "#3B82F6"
+    }
+  ],
+  "reminders": {
+    "matin_early": { "time": "07:30", "habits": ["Anti-école"] },
+    "matin": { "time": "08:00", "habits": ["Identité", "Corps", "Image"] },
+    "midi": { "time": "12:00", "habits": ["Business", "Environnement"] },
+    "soir": { "time": "20:00", "habits": ["Mental", "Sommeil"] },
+    "hebdo": { "time": "dimanche 20:00", "type": "validation" }
+  },
+  "weekly_validation": {
+    "semaine_1": {
+      "label": "Fondations",
+      "criteria": [
+        "7 actions business réalisées",
+        "7 actions corps réalisées",
+        "7 phrases identité écrites"
+      ]
+    },
+    "semaine_2": {
+      "label": "Consolidation",
+      "criteria": [
+        "Posture maintenue 7 jours",
+        "1 conversation business initiée",
+        "Règle des 3 secondes appliquée 3 fois"
+      ]
+    },
+    "semaine_3": {
+      "label": "Expansion",
+      "criteria": [
+        "1 reset utilisé avec succès",
+        "7 alignements réalisés",
+        "1 apprentissage business noté"
+      ]
+    },
+    "semaine_4": {
+      "label": "Intégration",
+      "criteria": [
+        "8/10 critères cochés",
+        "1 témoignage écrit",
+        "1 résultat business concret"
+      ]
+    }
+  },
+  "recovery": {
+    "1_jour_rate": {
+      "label": "Version minimale",
+      "actions": ["10 squats", "5 pompes", "20s gainage", "1 action business"]
+    },
+    "3_jours_rates": {
+      "label": "Reprise progressive",
+      "actions": ["1 action/jour pendant 3 jours", "puis retour à la normale"]
+    },
+    "7_jours_rates": {
+      "label": "Reset complet",
+      "actions": ["Recommencer semaine 1 en version allégée (4 items/jour)"]
+    }
+  },
+  "anti_ecole": {
+    "avant": "1 respiration 4-6 + phrase 'Je ne suis pas là pour être comme eux.'",
+    "pendant": "Posture + règle des 3 secondes + 'Je suis occupé.'",
+    "apres": "1 note + 1 action",
+    "si_glisse": "Reset : respiration + 1 action minimale"
+  },
+  "sources": [
+    { "name": "James Clear", "work": "Atomic Habits", "topic": "Identité et habitudes" },
+    { "name": "BJ Fogg", "work": "Tiny Habits", "topic": "Micro-habitudes" },
+    { "name": "Andrew Huberman", "work": "Huberman Lab Podcast", "topic": "Neurosciences" },
+    { "name": "Stanford Behavior Design Lab", "work": "Research", "topic": "Design comportemental" },
+    { "name": "Amy Cuddy", "work": "TED Talk / Presence", "topic": "Posture et présence" },
+    { "name": "Harvard Study", "work": "Impulsivity Research", "topic": "Règle des 3 secondes" },
+    { "name": "Cal Newport", "work": "Deep Work", "topic": "Travail profond" },
+    { "name": "Princeton University", "work": "Environment Research", "topic": "Environnement et cognition" },
+    { "name": "CDC", "work": "Sleep Guidelines", "topic": "Sommeil et santé" },
+    { "name": "Carl Rogers", "work": "Person-Centered Therapy", "topic": "Acceptation de soi" },
+    { "name": "UCL", "work": "Habit Formation Study", "topic": "66 jours pour l'automaticité" },
+    { "name": "EHP", "work": "Environmental Health Perspectives", "topic": "Impact environnemental" },
+    { "name": "PMC", "work": "PubMed Central", "topic": "Recherche médicale" },
+    { "name": "Tim Ferriss", "work": "4-Hour Work Week / Tools of Titans", "topic": "Productivité" },
+    { "name": "Joe Dispenza", "work": "Breaking the Habit of Being Yourself", "topic": "Neuroplasticité" },
+    { "name": "Brené Brown", "work": "Daring Greatly", "topic": "Vulnérabilité et courage" },
+    { "name": "Charles Duhigg", "work": "The Power of Habit", "topic": "Boucle d'habitude" }
+  ]
+}
