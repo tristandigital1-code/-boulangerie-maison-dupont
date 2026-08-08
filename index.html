@@ -3,251 +3,325 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Transformation 4 Semaines — Suivi d'Habitudes</title>
+<title>Transformation 4 Semaines</title>
 <style>
 :root {
-  --bg: #0F172A;
-  --bg-card: #1E293B;
-  --bg-card-hover: #334155;
-  --text: #F1F5F9;
-  --text-muted: #94A3B8;
-  --text-dim: #64748B;
-  --border: #334155;
-  --accent: #6366F1;
-  --accent-glow: rgba(99,102,241,0.15);
-  --success: #10B981;
-  --success-bg: rgba(16,185,129,0.12);
-  --danger: #EF4444;
-  --danger-bg: rgba(239,68,68,0.12);
-  --warning: #F59E0B;
-  --warning-bg: rgba(245,158,11,0.12);
-  --radius: 12px;
-  --radius-sm: 8px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --ground: #F5F6F8;
+  --surface: #FFFFFF;
+  --raised: #ECEEF2;
+  --border: #D8DBE3;
+  --border-subtle: #E8EAF0;
+  --text: #1B1F27;
+  --text-secondary: #5A6070;
+  --text-dim: #8B8FA3;
+  --accent: #4A7BF7;
+  --accent-soft: rgba(74,123,247,0.09);
+  --accent-mid: rgba(74,123,247,0.18);
+  --done: #3DA35D;
+  --done-soft: rgba(61,163,93,0.08);
+  --done-border: rgba(61,163,93,0.35);
+  --alert: #D4644A;
+  --alert-soft: rgba(212,100,74,0.08);
+  --warn: #C4973B;
+  --warn-soft: rgba(196,151,59,0.08);
+  --protocol: #7B61C2;
+  --protocol-soft: rgba(123,97,194,0.08);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', 'SF Mono', Menlo, Monaco, 'Courier New', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, 'Helvetica Neue', sans-serif;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #111318;
+    --surface: #1C1F26;
+    --raised: #262A33;
+    --border: #2E333D;
+    --border-subtle: #252930;
+    --text: #DFE1E6;
+    --text-secondary: #8B8FA3;
+    --text-dim: #5A6070;
+    --accent: #4A7BF7;
+    --accent-soft: rgba(74,123,247,0.10);
+    --accent-mid: rgba(74,123,247,0.20);
+    --done: #3DA35D;
+    --done-soft: rgba(61,163,93,0.08);
+    --done-border: rgba(61,163,93,0.30);
+    --alert: #D4644A;
+    --alert-soft: rgba(212,100,74,0.10);
+    --warn: #C4973B;
+    --warn-soft: rgba(196,151,59,0.10);
+    --protocol: #9B85D6;
+    --protocol-soft: rgba(155,133,214,0.10);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+    --shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground: #111318;
+  --surface: #1C1F26;
+  --raised: #262A33;
+  --border: #2E333D;
+  --border-subtle: #252930;
+  --text: #DFE1E6;
+  --text-secondary: #8B8FA3;
+  --text-dim: #5A6070;
+  --accent: #4A7BF7;
+  --accent-soft: rgba(74,123,247,0.10);
+  --accent-mid: rgba(74,123,247,0.20);
+  --done: #3DA35D;
+  --done-soft: rgba(61,163,93,0.08);
+  --done-border: rgba(61,163,93,0.30);
+  --alert: #D4644A;
+  --alert-soft: rgba(212,100,74,0.10);
+  --warn: #C4973B;
+  --warn-soft: rgba(196,151,59,0.10);
+  --protocol: #9B85D6;
+  --protocol-soft: rgba(155,133,214,0.10);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+  --shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  background: var(--bg);
+  font-family: var(--font-sans);
+  background: var(--ground);
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.55;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-.container {
-  max-width: 900px;
+.wrap {
+  max-width: 720px;
   margin: 0 auto;
-  padding: 20px 16px;
+  padding: 0 16px 48px;
 }
 
-header {
-  text-align: center;
-  padding: 32px 0 24px;
+/* ── Header ── */
+.site-header {
+  padding: 28px 0 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
 }
 
-header h1 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #6366F1, #EC4899);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.site-header h1 {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
 }
 
-header p {
-  color: var(--text-muted);
-  margin-top: 4px;
-  font-size: 0.9rem;
+.site-header .tagline {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-top: 3px;
+  letter-spacing: 0.02em;
 }
 
-.stats-bar {
+/* ── Stats row ── */
+.stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
-.stat-card {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 16px;
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 12px 10px;
   text-align: center;
-  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
-.stat-card .stat-value {
-  font-size: 1.5rem;
+.stat-val {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--accent);
+  font-variant-numeric: tabular-nums;
 }
 
-.stat-card .stat-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
+.stat-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-dim);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   margin-top: 2px;
 }
 
-.nav-tabs {
+/* ── Tabs ── */
+.tabs {
   display: flex;
-  gap: 4px;
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 4px;
-  margin-bottom: 24px;
+  gap: 2px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
   overflow-x: auto;
-  border: 1px solid var(--border);
+  scrollbar-width: none;
 }
+.tabs::-webkit-scrollbar { display: none; }
 
-.nav-tab {
-  flex: 1;
-  padding: 10px 12px;
+.tab {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  padding: 10px 14px;
+  background: none;
   border: none;
-  background: transparent;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  font-weight: 500;
-  border-radius: var(--radius-sm);
+  border-bottom: 2px solid transparent;
+  color: var(--text-dim);
   cursor: pointer;
-  transition: all 0.2s;
   white-space: nowrap;
-  font-family: inherit;
+  transition: color 0.15s, border-color 0.15s;
 }
 
-.nav-tab.active {
-  background: var(--accent);
-  color: white;
+.tab:hover { color: var(--text-secondary); }
+
+.tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
 }
 
-.nav-tab:hover:not(.active) {
-  background: var(--bg-card-hover);
-  color: var(--text);
-}
-
+/* ── Date nav ── */
 .date-nav {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 16px;
+  justify-content: space-between;
   margin-bottom: 20px;
+  padding: 0 2px;
 }
 
 .date-nav button {
-  background: var(--bg-card);
+  background: var(--surface);
   border: 1px solid var(--border);
-  color: var(--text);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  color: var(--text-secondary);
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  transition: background 0.15s;
+  font-family: var(--font-sans);
 }
 
-.date-nav button:hover { background: var(--bg-card-hover); }
+.date-nav button:hover { background: var(--raised); }
 
-.date-nav .date-display {
-  font-weight: 600;
-  font-size: 1rem;
-  min-width: 200px;
-  text-align: center;
+.date-label {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text);
+  letter-spacing: -0.01em;
 }
 
-.time-group {
-  margin-bottom: 20px;
-}
+/* ── Time groups ── */
+.time-group { margin-bottom: 20px; }
 
-.time-group-header {
+.tg-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-  padding-left: 4px;
+  gap: 10px;
+  margin-bottom: 8px;
+  padding-left: 2px;
 }
 
-.time-group-header .time-badge {
-  background: var(--accent-glow);
-  color: var(--accent);
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 0.75rem;
+.tg-time {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
   font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
 }
 
-.time-group-header h3 {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+.tg-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 
-.habit-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-  margin-bottom: 10px;
-  transition: all 0.2s;
+/* ── Habit cards ── */
+.habit {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 14px 14px 16px;
+  margin-bottom: 6px;
+  box-shadow: var(--shadow-sm);
+  transition: border-left-color 0.25s, background 0.2s;
 }
 
-.habit-card:hover { border-color: var(--text-dim); }
-
-.habit-card.done {
-  border-color: var(--success);
-  background: linear-gradient(135deg, var(--bg-card), var(--success-bg));
+.habit.done {
+  border-left-color: var(--done);
+  background: var(--done-soft);
 }
 
-.habit-top {
+.habit-row {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
 .habit-icon {
-  font-size: 1.5rem;
-  width: 44px;
-  height: 44px;
+  font-size: 1.1rem;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 6px;
   flex-shrink: 0;
+  background: var(--raised);
 }
 
-.habit-info { flex: 1; }
+.habit.done .habit-icon { background: var(--done-soft); }
+
+.habit-body { flex: 1; min-width: 0; }
 
 .habit-name {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
   font-weight: 600;
-  font-size: 1rem;
+  letter-spacing: -0.01em;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.habit-name .source-tag {
-  font-size: 0.65rem;
-  background: var(--bg-card-hover);
-  color: var(--text-muted);
-  padding: 2px 8px;
-  border-radius: 10px;
+.habit-src {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  color: var(--text-dim);
   font-weight: 400;
+  flex-shrink: 0;
 }
 
 .habit-desc {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  margin-top: 2px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  line-height: 1.45;
 }
 
-.habit-check {
-  width: 32px;
-  height: 32px;
+.check-btn {
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   border: 2px solid var(--border);
   background: transparent;
@@ -255,315 +329,385 @@ header p {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
   flex-shrink: 0;
+  transition: all 0.2s;
   color: transparent;
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 
-.habit-check.checked {
-  background: var(--success);
-  border-color: var(--success);
-  color: white;
+.check-btn:hover { border-color: var(--text-dim); }
+
+.check-btn.on {
+  background: var(--done);
+  border-color: var(--done);
+  color: #fff;
 }
 
-.habit-expand {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
+.habit-detail {
   display: none;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
 }
 
-.habit-card.expanded .habit-expand { display: block; }
+.habit.open .habit-detail { display: block; }
 
-.habit-expand .why {
-  background: var(--accent-glow);
-  border-left: 3px solid var(--accent);
-  padding: 10px 14px;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  margin-bottom: 12px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  font-style: italic;
+.why-block {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  padding: 8px 12px;
+  background: var(--accent-soft);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 8px;
+  line-height: 1.5;
 }
 
-.habit-expand .example {
-  background: var(--success-bg);
-  border-left: 3px solid var(--success);
-  padding: 10px 14px;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  margin-bottom: 12px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
+.why-block strong {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.note-input {
+.example-block {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  padding: 8px 12px;
+  background: var(--done-soft);
+  border-left: 2px solid var(--done);
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.note-field {
   width: 100%;
-  background: var(--bg);
+  background: var(--ground);
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 10px 12px;
+  border-radius: 6px;
+  padding: 8px 10px;
   color: var(--text);
-  font-size: 0.85rem;
-  font-family: inherit;
+  font-size: 0.8rem;
+  font-family: var(--font-sans);
   resize: none;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.15s;
+  line-height: 1.45;
 }
 
-.note-input:focus { border-color: var(--accent); }
+.note-field:focus { border-color: var(--accent); }
+.note-field::placeholder { color: var(--text-dim); }
 
-.note-input::placeholder { color: var(--text-dim); }
-
-.toggle-expand {
+.expand-btn {
   background: none;
   border: none;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
   color: var(--text-dim);
   cursor: pointer;
-  font-size: 0.8rem;
   padding: 4px 0;
-  margin-top: 4px;
-  font-family: inherit;
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+.expand-btn:hover { color: var(--text-secondary); }
+
+/* ── Weekly validation ── */
+.week-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
 }
 
-.toggle-expand:hover { color: var(--text-muted); }
-
-/* Weekly Validation */
-.week-section {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 16px;
-}
-
-.week-section h3 {
-  font-size: 1rem;
-  margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.week-section .week-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-bottom: 14px;
-}
-
-.week-badge {
-  font-size: 0.7rem;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-weight: 600;
-}
-
-.week-badge.current { background: var(--accent); color: white; }
-.week-badge.completed { background: var(--success); color: white; }
-.week-badge.upcoming { background: var(--bg-card-hover); color: var(--text-muted); }
-
-.criteria-list { list-style: none; }
-
-.criteria-item {
+.week-head {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 2px;
 }
 
-.criteria-item:last-child { border-bottom: none; }
+.week-head h3 {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
 
-.criteria-check {
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
+.wk-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wk-badge.now { background: var(--accent-soft); color: var(--accent); }
+.wk-badge.past { background: var(--done-soft); color: var(--done); }
+.wk-badge.next { background: var(--raised); color: var(--text-dim); }
+
+.week-sub {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.criteria { list-style: none; }
+
+.crit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.crit:first-child { border-top: none; }
+
+.crit-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
   border: 2px solid var(--border);
   background: transparent;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
   flex-shrink: 0;
+  transition: all 0.15s;
   color: transparent;
-  font-size: 0.75rem;
+  font-size: 0.6rem;
 }
 
-.criteria-check.checked {
-  background: var(--success);
-  border-color: var(--success);
-  color: white;
+.crit-btn.on {
+  background: var(--done);
+  border-color: var(--done);
+  color: #fff;
 }
 
-.criteria-text {
-  font-size: 0.9rem;
-  color: var(--text-muted);
+.crit-text {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
 }
 
-.criteria-check.checked + .criteria-text {
+.crit-btn.on + .crit-text {
   text-decoration: line-through;
   color: var(--text-dim);
 }
 
-/* Charts */
-.chart-container {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 16px;
+/* ── Charts ── */
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
 }
 
-.chart-container h3 {
-  font-size: 1rem;
-  margin-bottom: 16px;
+.chart-card h3 {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
 }
 
-.progress-ring {
+.ring-wrap {
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
-}
-
-.bar-chart {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .bar-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  margin-bottom: 5px;
 }
 
-.bar-label {
+.bar-lbl {
   width: 100px;
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
   text-align: right;
   flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bar-track {
   flex: 1;
-  height: 24px;
-  background: var(--bg);
-  border-radius: 12px;
+  height: 18px;
+  background: var(--raised);
+  border-radius: 3px;
   overflow: hidden;
-  position: relative;
 }
 
 .bar-fill {
   height: 100%;
-  border-radius: 12px;
-  transition: width 0.6s ease;
-  min-width: 0;
+  border-radius: 3px;
+  transition: width 0.5s ease;
 }
 
-.bar-value {
-  width: 45px;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  text-align: left;
+.bar-pct {
+  width: 36px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
   flex-shrink: 0;
 }
 
-.weekly-chart {
+.week-cols {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
 
-.week-bar-col {
+.wk-col {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
-.week-bar-outer {
-  width: 40px;
-  height: 120px;
-  background: var(--bg);
-  border-radius: 20px;
+.wk-col-pct {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.wk-col-bar {
+  width: 32px;
+  height: 100px;
+  background: var(--raised);
+  border-radius: 4px;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: flex-end;
 }
 
-.week-bar-inner {
+.wk-col-fill {
   width: 100%;
-  border-radius: 20px;
-  transition: height 0.6s ease;
+  border-radius: 4px;
+  transition: height 0.5s ease;
 }
 
-.week-bar-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
+.wk-col-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
 }
 
-.week-bar-pct {
-  font-size: 0.8rem;
+/* ── Recovery ── */
+.recov-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.recov-card h4 {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
   font-weight: 600;
-}
-
-/* Recovery */
-.recovery-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 12px;
-}
-
-.recovery-card h4 {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 4px;
+}
+
+.sev {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sev-low { background: var(--warn-soft); color: var(--warn); }
+.sev-mid { background: var(--alert-soft); color: var(--alert); }
+.sev-hi { background: rgba(212,100,74,0.15); color: var(--alert); }
+
+.recov-sub {
+  font-size: 0.78rem;
+  color: var(--text-dim);
   margin-bottom: 8px;
 }
 
-.recovery-card .severity {
-  font-size: 0.7rem;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-weight: 600;
+.recov-list { list-style: none; }
+
+.recov-list li {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  padding: 3px 0 3px 16px;
+  position: relative;
 }
 
-.severity.low { background: var(--warning-bg); color: var(--warning); }
-.severity.mid { background: rgba(249,115,22,0.15); color: #F97316; }
-.severity.high { background: var(--danger-bg); color: var(--danger); }
-
-.recovery-actions {
-  list-style: none;
-  padding-left: 0;
+.recov-list li::before {
+  content: "\2192";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.75rem;
 }
 
-.recovery-actions li {
-  padding: 4px 0;
-  color: var(--text-muted);
-  font-size: 0.9rem;
+.note-box {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-mid);
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin-top: 8px;
 }
 
-.recovery-actions li::before {
-  content: "→ ";
+.note-box p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.note-box strong {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   color: var(--accent);
 }
 
-/* Anti-école */
-.anti-ecole-section {
-  background: linear-gradient(135deg, var(--bg-card), rgba(139,92,246,0.08));
-  border: 1px solid #8B5CF6;
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 16px;
+/* ── Anti-école ── */
+.ae-section {
+  background: var(--surface);
+  border: 1px solid var(--protocol);
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
 }
 
-.anti-ecole-section h3 {
-  color: #A78BFA;
+.ae-section h3 {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--protocol);
+  margin-bottom: 4px;
+}
+
+.ae-section .ae-sub {
+  font-size: 0.78rem;
+  color: var(--text-dim);
   margin-bottom: 14px;
 }
 
@@ -572,128 +716,167 @@ header p {
   gap: 12px;
   align-items: flex-start;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(139,92,246,0.2);
+  border-top: 1px solid var(--border-subtle);
 }
 
-.ae-phase:last-child { border-bottom: none; }
+.ae-phase:first-of-type { border-top: none; }
 
-.ae-badge {
-  background: rgba(139,92,246,0.2);
-  color: #A78BFA;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  font-weight: 600;
+.ae-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--protocol);
+  background: var(--protocol-soft);
+  padding: 3px 8px;
+  border-radius: 3px;
+  letter-spacing: 0.06em;
   white-space: nowrap;
   flex-shrink: 0;
+  margin-top: 1px;
 }
 
 .ae-text {
-  font-size: 0.9rem;
-  color: var(--text-muted);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
 
-/* Sources */
-.sources-grid {
+/* ── Sources ── */
+.src-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 10px;
-}
-
-.source-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 12px;
-}
-
-.source-name {
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.source-work {
-  font-size: 0.8rem;
-  color: var(--accent);
-}
-
-.source-topic {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  margin-top: 2px;
-}
-
-/* App config guide */
-.guide-section {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 16px;
-}
-
-.guide-section h3 {
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 8px;
 }
 
-.guide-app {
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border);
+.src-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 10px 12px;
+  box-shadow: var(--shadow-sm);
 }
 
-.guide-app:last-child { border-bottom: none; }
+.src-num {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.src-name {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.src-work {
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+.src-topic {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  margin-top: 1px;
+}
+
+/* ── Guide ── */
+.guide-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.guide-card h3 {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.guide-app {
+  padding: 12px 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.guide-app:first-of-type { border-top: none; }
 
 .guide-app h4 {
-  font-size: 0.95rem;
-  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 2px;
 }
 
-.guide-app p {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+.guide-app > p {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin-bottom: 6px;
 }
 
-.guide-steps {
-  list-style: none;
-  margin-top: 8px;
-}
+.steps { list-style: none; counter-reset: step; }
 
-.guide-steps li {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  padding: 3px 0;
-  padding-left: 20px;
+.steps li {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  padding: 2px 0 2px 22px;
   position: relative;
+  counter-increment: step;
+  line-height: 1.5;
 }
 
-.guide-steps li::before {
-  content: attr(data-step);
+.steps li::before {
+  content: counter(step);
   position: absolute;
   left: 0;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
   color: var(--accent);
-  font-weight: 600;
-  font-size: 0.75rem;
+  width: 15px;
+  text-align: right;
 }
 
-/* Notification */
+.reminder-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.82rem;
+}
+
+.reminder-row:first-child { border-top: none; }
+
+.reminder-time {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.reminder-what { color: var(--text-secondary); }
+
+/* ── Toast ── */
 .toast {
   position: fixed;
-  bottom: 24px;
+  bottom: 20px;
   left: 50%;
-  transform: translateX(-50%) translateY(80px);
-  background: var(--success);
-  color: white;
-  padding: 12px 24px;
-  border-radius: var(--radius);
-  font-weight: 500;
-  font-size: 0.9rem;
+  transform: translateX(-50%) translateY(60px);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  background: var(--done);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 6px;
   opacity: 0;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   z-index: 100;
   pointer-events: none;
+  letter-spacing: -0.01em;
 }
 
 .toast.show {
@@ -701,609 +884,346 @@ header p {
   opacity: 1;
 }
 
-@media (max-width: 640px) {
-  .stats-bar { grid-template-columns: repeat(2, 1fr); }
-  .nav-tabs { overflow-x: auto; }
-  .nav-tab { font-size: 0.78rem; padding: 8px 8px; }
-  .bar-label { width: 70px; font-size: 0.7rem; }
-  .weekly-chart { gap: 8px; }
-  .sources-grid { grid-template-columns: 1fr; }
-  header h1 { font-size: 1.4rem; }
+/* ── Responsive ── */
+@media (max-width: 560px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .tabs { gap: 0; }
+  .tab { padding: 8px 10px; font-size: 0.68rem; }
+  .bar-lbl { width: 66px; font-size: 0.62rem; }
+  .src-grid { grid-template-columns: 1fr; }
+  .habit-name { flex-wrap: wrap; }
+  .habit-src { display: none; }
+  .week-cols { gap: 8px; }
+  .wk-col-bar { height: 80px; }
 }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <header>
+<div class="wrap">
+  <header class="site-header">
     <h1>Transformation 4 Semaines</h1>
-    <p>Sciences du comportement — 17 sources — 8 habitudes/jour</p>
+    <div class="tagline">17 sources / 8 habitudes / sciences du comportement</div>
   </header>
 
-  <div class="stats-bar" id="statsBar"></div>
+  <div class="stats" id="stats"></div>
 
-  <div class="nav-tabs" id="navTabs">
-    <button class="nav-tab active" data-tab="daily">Quotidien</button>
-    <button class="nav-tab" data-tab="weekly">Validation</button>
-    <button class="nav-tab" data-tab="charts">Graphiques</button>
-    <button class="nav-tab" data-tab="recovery">Rattrapage</button>
-    <button class="nav-tab" data-tab="anti-ecole">Anti-école</button>
-    <button class="nav-tab" data-tab="sources">Sources</button>
-    <button class="nav-tab" data-tab="guide">Config Apps</button>
-  </div>
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-t="daily">quotidien</button>
+    <button class="tab" data-t="weekly">validation</button>
+    <button class="tab" data-t="charts">graphiques</button>
+    <button class="tab" data-t="recovery">rattrapage</button>
+    <button class="tab" data-t="anti">anti-ecole</button>
+    <button class="tab" data-t="sources">sources</button>
+    <button class="tab" data-t="guide">config</button>
+  </nav>
 
-  <div id="tabContent"></div>
+  <main id="main"></main>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const HABITS = [
-  { id:1, name:"Identité", cat:"matin", time:"08:00", src:"James Clear (Atomic Habits)", desc:"Écris une phrase d'identité + 1 intention.", why:"James Clear a dit : «Every action you take is a vote for the type of person you wish to become.»", ex:"Je suis ce type de personne. C'est normal pour moi de faire 1 action business/jour.", icon:"🪞", color:"#6366F1" },
-  { id:2, name:"Corps", cat:"matin", time:"08:00", src:"BJ Fogg (Tiny Habits), CDC", desc:"Circuit 3 tours OU minimum vital (10 squats + 5 pompes + 20s gainage).", why:"BJ Fogg a dit que les petites actions répétées deviennent automatiques.", ex:null, icon:"💪", color:"#EF4444" },
-  { id:3, name:"Image", cat:"matin", time:"08:00", src:"Amy Cuddy (TED, posture)", desc:"Visage + dents + déo + vêtements propres.", why:"Amy Cuddy a dit que la posture et l'apparence changent ta présence.", ex:null, icon:"👔", color:"#F59E0B" },
-  { id:4, name:"Anti-école", cat:"matin", time:"07:30", src:"Harvard Study, Stanford Lab", desc:"1 respiration 4-6 + phrase «Je ne suis pas là pour être comme eux.»", why:"Harvard a dit que la règle des 3 secondes coupe l'impulsivité. Stanford a dit que les cues déclenchent les habitudes.", ex:null, icon:"🛡️", color:"#8B5CF6" },
-  { id:5, name:"Business", cat:"midi", time:"12:00", src:"Cal Newport (Deep Work), Tim Ferriss", desc:"1 action business (message, relance, test d'offre).", why:"Cal Newport a dit que le travail profond et régulier est plus efficace que le «busy work».", ex:null, icon:"💼", color:"#10B981" },
-  { id:6, name:"Environnement", cat:"midi", time:"12:00", src:"Stanford Behavior Design Lab", desc:"1 micro-action environnement (1 objet à sa place, 1 notification supprimée).", why:"Stanford a dit que l'environnement et les cues déclenchent les habitudes.", ex:null, icon:"🏠", color:"#06B6D4" },
-  { id:7, name:"Mental", cat:"soir", time:"20:00", src:"Huberman Lab, Joe Dispenza", desc:"1 note de réaction/émotion (ex: «Aujourd'hui j'ai évité de justifier»).", why:"Huberman a dit que la réflexion consolide l'apprentissage. Dispenza a dit que la neuroplasticité permet de changer les habitudes.", ex:null, icon:"🧠", color:"#EC4899" },
-  { id:8, name:"Sommeil", cat:"soir", time:"20:00", src:"CDC, Sleep Foundation", desc:"7h minimum + écrans réduits 30min avant.", why:"CDC a dit que 7h de sommeil minimum est crucial pour la santé.", ex:null, icon:"😴", color:"#3B82F6" }
+const H = [
+  { id:1, n:"Identite", cat:"matin", t:"08:00", src:"James Clear", desc:"Ecris une phrase d'identite + 1 intention.", why:"James Clear a dit : «Every action you take is a vote for the type of person you wish to become.»", ex:"Je suis ce type de personne. C'est normal pour moi de faire 1 action business/jour.", icon:"🪞", c:"#4A7BF7" },
+  { id:2, n:"Corps", cat:"matin", t:"08:00", src:"BJ Fogg, CDC", desc:"Circuit 3 tours OU minimum vital (10 squats + 5 pompes + 20s gainage).", why:"BJ Fogg a dit que les petites actions repetees deviennent automatiques.", ex:null, icon:"💪", c:"#D4644A" },
+  { id:3, n:"Image", cat:"matin", t:"08:00", src:"Amy Cuddy", desc:"Visage + dents + deo + vetements propres.", why:"Amy Cuddy a dit que la posture et l'apparence changent ta presence.", ex:null, icon:"👔", c:"#C4973B" },
+  { id:4, n:"Anti-ecole", cat:"matin", t:"07:30", src:"Harvard, Stanford", desc:"1 respiration 4-6 + phrase «Je ne suis pas la pour etre comme eux.»", why:"Harvard a dit que la regle des 3 secondes coupe l'impulsivite. Stanford a dit que les cues declenchent les habitudes.", ex:null, icon:"🛡️", c:"#7B61C2" },
+  { id:5, n:"Business", cat:"midi", t:"12:00", src:"Cal Newport, Ferriss", desc:"1 action business (message, relance, test d'offre).", why:"Cal Newport a dit que le travail profond et regulier est plus efficace que le «busy work».", ex:null, icon:"💼", c:"#3DA35D" },
+  { id:6, n:"Environnement", cat:"midi", t:"12:00", src:"Stanford Lab", desc:"1 micro-action environnement (1 objet a sa place, 1 notification supprimee).", why:"Stanford a dit que l'environnement et les cues declenchent les habitudes.", ex:null, icon:"🏠", c:"#4A7BF7" },
+  { id:7, n:"Mental", cat:"soir", t:"20:00", src:"Huberman, Dispenza", desc:"1 note de reaction/emotion (ex: «Aujourd'hui j'ai evite de justifier»).", why:"Huberman a dit que la reflexion consolide l'apprentissage. Dispenza a dit que la neuroplasticite permet de changer les habitudes.", ex:null, icon:"🧠", c:"#9B85D6" },
+  { id:8, n:"Sommeil", cat:"soir", t:"20:00", src:"CDC, Sleep Foundation", desc:"7h minimum + ecrans reduits 30min avant.", why:"CDC a dit que 7h de sommeil minimum est crucial pour la sante.", ex:null, icon:"😴", c:"#4A7BF7" }
 ];
 
-const WEEKS = [
-  { num:1, label:"Fondations", criteria:["7 actions business réalisées","7 actions corps réalisées","7 phrases identité écrites"] },
-  { num:2, label:"Consolidation", criteria:["Posture maintenue 7 jours","1 conversation business initiée","Règle des 3 secondes appliquée 3 fois"] },
-  { num:3, label:"Expansion", criteria:["1 reset utilisé avec succès","7 alignements réalisés","1 apprentissage business noté"] },
-  { num:4, label:"Intégration", criteria:["8/10 critères cochés","1 témoignage écrit","1 résultat business concret"] }
+const WK = [
+  { n:1, l:"Fondations", cr:["7 actions business realisees","7 actions corps realisees","7 phrases identite ecrites"] },
+  { n:2, l:"Consolidation", cr:["Posture maintenue 7 jours","1 conversation business initiee","Regle des 3 secondes appliquee 3 fois"] },
+  { n:3, l:"Expansion", cr:["1 reset utilise avec succes","7 alignements realises","1 apprentissage business note"] },
+  { n:4, l:"Integration", cr:["8/10 criteres coches","1 temoignage ecrit","1 resultat business concret"] }
 ];
 
-const SOURCES = [
-  { name:"James Clear", work:"Atomic Habits", topic:"Identité et habitudes" },
-  { name:"BJ Fogg", work:"Tiny Habits", topic:"Micro-habitudes" },
-  { name:"Andrew Huberman", work:"Huberman Lab Podcast", topic:"Neurosciences" },
-  { name:"Stanford Behavior Design Lab", work:"Research", topic:"Design comportemental" },
-  { name:"Amy Cuddy", work:"TED Talk / Presence", topic:"Posture et présence" },
-  { name:"Harvard Study", work:"Impulsivity Research", topic:"Règle des 3 secondes" },
-  { name:"Cal Newport", work:"Deep Work", topic:"Travail profond" },
-  { name:"Princeton University", work:"Environment Research", topic:"Environnement et cognition" },
-  { name:"CDC", work:"Sleep Guidelines", topic:"Sommeil et santé" },
-  { name:"Carl Rogers", work:"Person-Centered Therapy", topic:"Acceptation de soi" },
-  { name:"UCL", work:"Habit Formation Study", topic:"66 jours pour l'automaticité" },
-  { name:"EHP", work:"Environmental Health Perspectives", topic:"Impact environnemental" },
-  { name:"PMC", work:"PubMed Central", topic:"Recherche médicale" },
-  { name:"Tim Ferriss", work:"4-Hour Work Week / Tools of Titans", topic:"Productivité" },
-  { name:"Joe Dispenza", work:"Breaking the Habit of Being Yourself", topic:"Neuroplasticité" },
-  { name:"Brené Brown", work:"Daring Greatly", topic:"Vulnérabilité et courage" },
-  { name:"Charles Duhigg", work:"The Power of Habit", topic:"Boucle d'habitude" }
+const SRC = [
+  { n:"James Clear", w:"Atomic Habits", t:"Identite et habitudes" },
+  { n:"BJ Fogg", w:"Tiny Habits", t:"Micro-habitudes" },
+  { n:"Andrew Huberman", w:"Huberman Lab Podcast", t:"Neurosciences" },
+  { n:"Stanford Behavior Design Lab", w:"Research", t:"Design comportemental" },
+  { n:"Amy Cuddy", w:"TED Talk / Presence", t:"Posture et presence" },
+  { n:"Harvard Study", w:"Impulsivity Research", t:"Regle des 3 secondes" },
+  { n:"Cal Newport", w:"Deep Work", t:"Travail profond" },
+  { n:"Princeton University", w:"Environment Research", t:"Environnement et cognition" },
+  { n:"CDC", w:"Sleep Guidelines", t:"Sommeil et sante" },
+  { n:"Carl Rogers", w:"Person-Centered Therapy", t:"Acceptation de soi" },
+  { n:"UCL", w:"Habit Formation Study", t:"66 jours pour l'automaticite" },
+  { n:"EHP", w:"Environmental Health Perspectives", t:"Impact environnemental" },
+  { n:"PMC", w:"PubMed Central", t:"Recherche medicale" },
+  { n:"Tim Ferriss", w:"4-Hour Work Week", t:"Productivite" },
+  { n:"Joe Dispenza", w:"Breaking the Habit of Being Yourself", t:"Neuroplasticite" },
+  { n:"Brene Brown", w:"Daring Greatly", t:"Vulnerabilite et courage" },
+  { n:"Charles Duhigg", w:"The Power of Habit", t:"Boucle d'habitude" }
 ];
 
-let currentDate = new Date();
-let currentTab = 'daily';
-let startDate = null;
+let curDate = new Date();
+let curTab = 'daily';
 
-function dateKey(d) {
-  return d.toISOString().split('T')[0];
+const dk = d => d.toISOString().split('T')[0];
+const load = () => { try { return JSON.parse(localStorage.getItem('t4s') || '{}'); } catch { return {}; } };
+const save = d => localStorage.setItem('t4s', JSON.stringify(d));
+
+function getDay(ds) {
+  const d = load();
+  if (!d[ds]) { d[ds] = { h:{}, no:{} }; H.forEach(h => { d[ds].h[h.id] = false; d[ds].no[h.id] = ''; }); save(d); }
+  return d[ds];
 }
 
-function loadData() {
-  const raw = localStorage.getItem('t4s_data');
-  return raw ? JSON.parse(raw) : {};
+function toggleH(ds, id) {
+  const d = load(); if (!d[ds]) getDay(ds);
+  d[ds].h[id] = !d[ds].h[id]; save(d); render();
+  if (d[ds].h[id]) toast('Continue.');
 }
 
-function saveData(data) {
-  localStorage.setItem('t4s_data', JSON.stringify(data));
+function saveNote(ds, id, v) { const d = load(); if (!d[ds]) getDay(ds); d[ds].no[id] = v; save(d); }
+
+function getWk(n) { try { return JSON.parse(localStorage.getItem('wk'+n) || '{}'); } catch { return {}; } }
+function toggleWk(n, i) { const w = getWk(n); w[i] = !w[i]; localStorage.setItem('wk'+n, JSON.stringify(w)); render(); }
+
+function initStart() {
+  let s = localStorage.getItem('t4s_s');
+  if (!s) { s = new Date().toISOString(); localStorage.setItem('t4s_s', s); }
+  return new Date(s);
 }
 
-function getDay(dateStr) {
-  const data = loadData();
-  if (!data[dateStr]) {
-    data[dateStr] = { habits: {}, notes: {} };
-    HABITS.forEach(h => {
-      data[dateStr].habits[h.id] = false;
-      data[dateStr].notes[h.id] = '';
-    });
-    saveData(data);
+const startDate = initStart();
+
+function curWeek() {
+  const diff = Math.floor((new Date() - startDate) / 864e5);
+  return Math.min(4, Math.max(1, Math.floor(diff/7)+1));
+}
+
+function dayProg(ds) {
+  const day = getDay(ds);
+  return Math.round(Object.values(day.h).filter(Boolean).length / H.length * 100);
+}
+
+function streak() {
+  let s = 0, d = new Date();
+  while(true) {
+    const data = load(), key = dk(d);
+    if (data[key]?.h && Object.values(data[key].h).filter(Boolean).length >= 6) { s++; d.setDate(d.getDate()-1); }
+    else break;
   }
-  return data[dateStr];
+  return s;
 }
 
-function toggleHabit(dateStr, hId) {
-  const data = loadData();
-  if (!data[dateStr]) getDay(dateStr);
-  data[dateStr].habits[hId] = !data[dateStr].habits[hId];
-  saveData(data);
-  render();
-  if (data[dateStr].habits[hId]) showToast('Bravo ! Continue comme ça 💪');
+function totalDone() {
+  let t = 0;
+  Object.values(load()).forEach(d => { if(d.h) t += Object.values(d.h).filter(Boolean).length; });
+  return t;
 }
 
-function saveNote(dateStr, hId, val) {
-  const data = loadData();
-  if (!data[dateStr]) getDay(dateStr);
-  data[dateStr].notes[hId] = val;
-  saveData(data);
+function overallProg() {
+  const data = load(), days = Object.keys(data);
+  if (!days.length) return 0;
+  let t = 0;
+  days.forEach(d => { if(data[d].h) t += Object.values(data[d].h).filter(Boolean).length / H.length; });
+  return Math.round(t / days.length * 100);
 }
 
-function getWeekData(weekNum) {
-  const key = 'week_' + weekNum;
-  const raw = localStorage.getItem(key);
-  return raw ? JSON.parse(raw) : {};
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 1800);
 }
 
-function toggleWeekCriteria(weekNum, idx) {
-  const wd = getWeekData(weekNum);
-  wd[idx] = !wd[idx];
-  localStorage.setItem('week_' + weekNum, JSON.stringify(wd));
-  render();
-}
-
-function getStartDate() {
-  if (!startDate) {
-    const s = localStorage.getItem('t4s_start');
-    if (s) {
-      startDate = new Date(s);
-    } else {
-      startDate = new Date();
-      localStorage.setItem('t4s_start', startDate.toISOString());
-    }
-  }
-  return startDate;
-}
-
-function getCurrentWeek() {
-  const s = getStartDate();
-  const diff = Math.floor((new Date() - s) / (1000*60*60*24));
-  return Math.min(4, Math.max(1, Math.floor(diff / 7) + 1));
-}
-
-function getDayProgress(dateStr) {
-  const day = getDay(dateStr);
-  const done = Object.values(day.habits).filter(Boolean).length;
-  return Math.round((done / HABITS.length) * 100);
-}
-
-function getOverallProgress() {
-  const data = loadData();
-  const days = Object.keys(data);
-  if (days.length === 0) return 0;
-  let total = 0;
-  days.forEach(d => {
-    if (data[d].habits) {
-      const done = Object.values(data[d].habits).filter(Boolean).length;
-      total += done / HABITS.length;
-    }
-  });
-  return Math.round((total / Math.max(days.length, 1)) * 100);
-}
-
-function getStreak() {
-  let streak = 0;
-  let d = new Date();
-  while (true) {
-    const key = dateKey(d);
-    const data = loadData();
-    if (data[key] && data[key].habits) {
-      const done = Object.values(data[key].habits).filter(Boolean).length;
-      if (done >= 6) {
-        streak++;
-        d.setDate(d.getDate() - 1);
-      } else break;
-    } else break;
-  }
-  return streak;
-}
-
-function getTotalDone() {
-  const data = loadData();
-  let total = 0;
-  Object.values(data).forEach(d => {
-    if (d.habits) total += Object.values(d.habits).filter(Boolean).length;
-  });
-  return total;
-}
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2000);
-}
-
-function formatDate(d) {
-  const days = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-  const months = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-  return `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}`;
+function fmtDate(d) {
+  const dn = ['dim','lun','mar','mer','jeu','ven','sam'];
+  const mn = ['jan','fev','mar','avr','mai','jun','jul','aou','sep','oct','nov','dec'];
+  return `${dn[d.getDay()]} ${d.getDate()} ${mn[d.getMonth()]} ${d.getFullYear()}`;
 }
 
 function renderStats() {
-  const dk = dateKey(currentDate);
-  const prog = getDayProgress(dk);
-  const streak = getStreak();
-  const total = getTotalDone();
-  const week = getCurrentWeek();
-
-  document.getElementById('statsBar').innerHTML = `
-    <div class="stat-card"><div class="stat-value">${prog}%</div><div class="stat-label">Aujourd'hui</div></div>
-    <div class="stat-card"><div class="stat-value">${streak}</div><div class="stat-label">Série (jours)</div></div>
-    <div class="stat-card"><div class="stat-value">${total}</div><div class="stat-label">Total fait</div></div>
-    <div class="stat-card"><div class="stat-value">S${week}</div><div class="stat-label">Semaine</div></div>
-  `;
+  const ds = dk(curDate);
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="stat-val">${dayProg(ds)}%</div><div class="stat-lbl">aujourd'hui</div></div>
+    <div class="stat"><div class="stat-val">${streak()}</div><div class="stat-lbl">serie</div></div>
+    <div class="stat"><div class="stat-val">${totalDone()}</div><div class="stat-lbl">total</div></div>
+    <div class="stat"><div class="stat-val">S${curWeek()}</div><div class="stat-lbl">semaine</div></div>`;
 }
 
 function renderDaily() {
-  const dk = dateKey(currentDate);
-  const day = getDay(dk);
-  const groups = { '07:30': { label:'Matin tôt', habits:[] }, '08:00': { label:'Matin', habits:[] }, '12:00': { label:'Midi', habits:[] }, '20:00': { label:'Soir', habits:[] } };
+  const ds = dk(curDate), day = getDay(ds);
+  const groups = { '07:30':{l:'matin tot',items:[]}, '08:00':{l:'matin',items:[]}, '12:00':{l:'midi',items:[]}, '20:00':{l:'soir',items:[]} };
+  H.forEach(h => groups[h.t]?.items.push(h));
 
-  HABITS.forEach(h => {
-    if (groups[h.time]) groups[h.time].habits.push(h);
-  });
+  let o = `<div class="date-nav">
+    <button onclick="chgDate(-1)">‹</button>
+    <span class="date-label">${fmtDate(curDate)}</span>
+    <button onclick="chgDate(1)">›</button>
+  </div>`;
 
-  let html = `
-    <div class="date-nav">
-      <button onclick="changeDate(-1)">‹</button>
-      <div class="date-display">${formatDate(currentDate)}</div>
-      <button onclick="changeDate(1)">›</button>
-    </div>
-  `;
-
-  Object.entries(groups).forEach(([time, g]) => {
-    if (g.habits.length === 0) return;
-    html += `<div class="time-group">
-      <div class="time-group-header">
-        <span class="time-badge">${time}</span>
-        <h3>${g.label}</h3>
+  for (const [time, g] of Object.entries(groups)) {
+    if (!g.items.length) continue;
+    o += `<div class="time-group"><div class="tg-header">
+      <span class="tg-time">${time}</span><span class="tg-label">${g.l}</span></div>`;
+    g.items.forEach(h => {
+      const done = day.h[h.id], note = day.no[h.id] || '';
+      o += `<div class="habit${done?' done':''}" id="h${h.id}">
+        <div class="habit-row">
+          <div class="habit-icon">${h.icon}</div>
+          <div class="habit-body">
+            <div class="habit-name">${h.n} <span class="habit-src">${h.src}</span></div>
+            <div class="habit-desc">${h.desc}</div>
+          </div>
+          <button class="check-btn${done?' on':''}" onclick="toggleH('${ds}',${h.id})">✓</button>
+        </div>
+        <button class="expand-btn" onclick="document.getElementById('h${h.id}').classList.toggle('open')">details + note ▾</button>
+        <div class="habit-detail">
+          <div class="why-block"><strong>pourquoi</strong><br>${h.why}</div>
+          ${h.ex ? `<div class="example-block">${h.ex}</div>` : ''}
+          <textarea class="note-field" rows="2" placeholder="Note du jour…" onchange="saveNote('${ds}',${h.id},this.value)">${note}</textarea>
+        </div>
       </div>`;
-
-    g.habits.forEach(h => {
-      const done = day.habits[h.id];
-      const note = day.notes[h.id] || '';
-      html += `
-        <div class="habit-card ${done ? 'done' : ''}" id="habit-${h.id}">
-          <div class="habit-top">
-            <div class="habit-icon" style="background:${h.color}22">${h.icon}</div>
-            <div class="habit-info">
-              <div class="habit-name">${h.name} <span class="source-tag">${h.src.split('(')[0].trim()}</span></div>
-              <div class="habit-desc">${h.desc}</div>
-            </div>
-            <button class="habit-check ${done ? 'checked' : ''}" onclick="toggleHabit('${dk}',${h.id})">✓</button>
-          </div>
-          <button class="toggle-expand" onclick="toggleExpand(${h.id})">Détails & Note ▾</button>
-          <div class="habit-expand">
-            <div class="why">💡 <strong>Pourquoi :</strong> ${h.why}</div>
-            ${h.ex ? `<div class="example">📝 <strong>Exemple :</strong> ${h.ex}</div>` : ''}
-            <textarea class="note-input" rows="2" placeholder="Note du jour (1 phrase)…" onchange="saveNote('${dk}',${h.id},this.value)">${note}</textarea>
-          </div>
-        </div>`;
     });
-    html += '</div>';
-  });
-
-  document.getElementById('tabContent').innerHTML = html;
+    o += '</div>';
+  }
+  document.getElementById('main').innerHTML = o;
 }
 
-function toggleExpand(id) {
-  document.getElementById('habit-'+id).classList.toggle('expanded');
-}
-
-function changeDate(delta) {
-  currentDate.setDate(currentDate.getDate() + delta);
-  render();
-}
+function chgDate(d) { curDate.setDate(curDate.getDate()+d); render(); }
 
 function renderWeekly() {
-  const cw = getCurrentWeek();
-  let html = '';
-  WEEKS.forEach(w => {
-    const wd = getWeekData(w.num);
-    let status = w.num < cw ? 'completed' : (w.num === cw ? 'current' : 'upcoming');
-    const done = w.criteria.filter((_, i) => wd[i]).length;
-    const pct = Math.round((done / w.criteria.length) * 100);
-
-    html += `<div class="week-section">
-      <h3>Semaine ${w.num} <span class="week-badge ${status}">${status === 'current' ? 'En cours' : status === 'completed' ? 'Terminée' : 'À venir'}</span></h3>
-      <div class="week-label">${w.label} — ${pct}% complété</div>
-      <ul class="criteria-list">`;
-
-    w.criteria.forEach((c, i) => {
-      html += `<li class="criteria-item">
-        <button class="criteria-check ${wd[i] ? 'checked' : ''}" onclick="toggleWeekCriteria(${w.num},${i})">✓</button>
-        <span class="criteria-text">${c}</span>
-      </li>`;
+  const cw = curWeek();
+  let o = '';
+  WK.forEach(w => {
+    const wd = getWk(w.n);
+    const st = w.n < cw ? 'past' : w.n === cw ? 'now' : 'next';
+    const stL = st === 'now' ? 'en cours' : st === 'past' ? 'fait' : 'a venir';
+    const done = w.cr.filter((_,i) => wd[i]).length;
+    o += `<div class="week-card"><div class="week-head"><h3>Semaine ${w.n}</h3><span class="wk-badge ${st}">${stL}</span></div>
+      <div class="week-sub">${w.l} — ${Math.round(done/w.cr.length*100)}%</div>
+      <ul class="criteria">`;
+    w.cr.forEach((c,i) => {
+      o += `<li class="crit"><button class="crit-btn${wd[i]?' on':''}" onclick="toggleWk(${w.n},${i})">✓</button><span class="crit-text">${c}</span></li>`;
     });
-
-    html += '</ul></div>';
+    o += '</ul></div>';
   });
-
-  document.getElementById('tabContent').innerHTML = html;
+  document.getElementById('main').innerHTML = o;
 }
 
 function renderCharts() {
-  const dk = dateKey(currentDate);
-  const overall = getOverallProgress();
+  const overall = overallProg();
+  const data = load(), days = Object.keys(data).sort().slice(-7);
 
-  let habitsHtml = '';
-  const data = loadData();
-  const days = Object.keys(data).sort();
-  const last7 = days.slice(-7);
-
-  HABITS.forEach(h => {
+  let bars = '';
+  H.forEach(h => {
     let count = 0;
-    last7.forEach(d => {
-      if (data[d] && data[d].habits && data[d].habits[h.id]) count++;
-    });
-    const pct = last7.length > 0 ? Math.round((count / last7.length) * 100) : 0;
-    habitsHtml += `<div class="bar-row">
-      <span class="bar-label">${h.icon} ${h.name}</span>
-      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${h.color}"></div></div>
-      <span class="bar-value">${pct}%</span>
-    </div>`;
+    days.forEach(d => { if(data[d]?.h?.[h.id]) count++; });
+    const pct = days.length ? Math.round(count/days.length*100) : 0;
+    bars += `<div class="bar-row"><span class="bar-lbl">${h.icon} ${h.n}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${h.c}"></div></div><span class="bar-pct">${pct}%</span></div>`;
   });
 
-  let weeklyHtml = '';
-  WEEKS.forEach(w => {
-    const wd = getWeekData(w.num);
-    const done = w.criteria.filter((_, i) => wd[i]).length;
-    const pct = Math.round((done / w.criteria.length) * 100);
-    const colors = ['#6366F1','#EC4899','#10B981','#F59E0B'];
-    weeklyHtml += `<div class="week-bar-col">
-      <div class="week-bar-pct">${pct}%</div>
-      <div class="week-bar-outer"><div class="week-bar-inner" style="height:${pct}%;background:${colors[w.num-1]}"></div></div>
-      <div class="week-bar-label">S${w.num}</div>
-    </div>`;
+  let wcols = '';
+  const wColors = ['#4A7BF7','#9B85D6','#3DA35D','#C4973B'];
+  WK.forEach(w => {
+    const wd = getWk(w.n);
+    const done = w.cr.filter((_,i) => wd[i]).length;
+    const pct = Math.round(done/w.cr.length*100);
+    wcols += `<div class="wk-col"><span class="wk-col-pct">${pct}%</span><div class="wk-col-bar"><div class="wk-col-fill" style="height:${pct}%;background:${wColors[w.n-1]}"></div></div><span class="wk-col-lbl">S${w.n}</span></div>`;
   });
 
-  const svgSize = 140;
-  const r = 58;
-  const circ = 2 * Math.PI * r;
-  const offset = circ - (overall / 100) * circ;
+  const r = 54, circ = 2*Math.PI*r, off = circ - (overall/100)*circ;
 
-  document.getElementById('tabContent').innerHTML = `
-    <div class="chart-container">
-      <h3>Progression globale</h3>
-      <div class="progress-ring">
-        <svg width="${svgSize}" height="${svgSize}" viewBox="0 0 ${svgSize} ${svgSize}">
-          <circle cx="${svgSize/2}" cy="${svgSize/2}" r="${r}" fill="none" stroke="var(--border)" stroke-width="10"/>
-          <circle cx="${svgSize/2}" cy="${svgSize/2}" r="${r}" fill="none" stroke="url(#grad)" stroke-width="10"
-            stroke-dasharray="${circ}" stroke-dashoffset="${offset}"
-            stroke-linecap="round" transform="rotate(-90 ${svgSize/2} ${svgSize/2})"
-            style="transition:stroke-dashoffset 0.8s ease"/>
-          <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#6366F1"/>
-            <stop offset="100%" stop-color="#EC4899"/>
-          </linearGradient></defs>
-          <text x="${svgSize/2}" y="${svgSize/2+6}" text-anchor="middle" font-size="28" font-weight="700" fill="var(--text)">${overall}%</text>
+  document.getElementById('main').innerHTML = `
+    <div class="chart-card"><h3>progression globale</h3>
+      <div class="ring-wrap">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+          <circle cx="65" cy="65" r="${r}" fill="none" stroke="var(--border)" stroke-width="8"/>
+          <circle cx="65" cy="65" r="${r}" fill="none" stroke="var(--accent)" stroke-width="8"
+            stroke-dasharray="${circ}" stroke-dashoffset="${off}" stroke-linecap="round"
+            transform="rotate(-90 65 65)" style="transition:stroke-dashoffset 0.6s ease"/>
+          <text x="65" y="70" text-anchor="middle" font-family="var(--font-mono)" font-size="22" font-weight="700" fill="var(--text)">${overall}%</text>
         </svg>
       </div>
     </div>
-
-    <div class="chart-container">
-      <h3>Items quotidiens (7 derniers jours)</h3>
-      <div class="bar-chart">${habitsHtml}</div>
-    </div>
-
-    <div class="chart-container">
-      <h3>Validation hebdomadaire</h3>
-      <div class="weekly-chart">${weeklyHtml}</div>
-    </div>
-  `;
+    <div class="chart-card"><h3>items quotidiens (7 derniers jours)</h3><div>${bars}</div></div>
+    <div class="chart-card"><h3>validation hebdomadaire</h3><div class="week-cols">${wcols}</div></div>`;
 }
 
 function renderRecovery() {
-  document.getElementById('tabContent').innerHTML = `
-    <div class="recovery-card">
-      <h4>1 jour raté <span class="severity low">Facile</span></h4>
-      <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:8px">Version minimale pour ne pas casser la chaîne</p>
-      <ul class="recovery-actions">
-        <li>10 squats</li>
-        <li>5 pompes</li>
-        <li>20 secondes de gainage</li>
-        <li>1 action business (un message suffit)</li>
-      </ul>
-    </div>
-
-    <div class="recovery-card">
-      <h4>3 jours ratés <span class="severity mid">Modéré</span></h4>
-      <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:8px">Reprise progressive sur 3 jours</p>
-      <ul class="recovery-actions">
-        <li>Jour 1 : 1 seule action (la plus facile)</li>
-        <li>Jour 2 : 2 actions</li>
-        <li>Jour 3 : 3 actions, puis retour à la normale</li>
-      </ul>
-    </div>
-
-    <div class="recovery-card">
-      <h4>7 jours ratés <span class="severity high">Reset</span></h4>
-      <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:8px">Recommencer semaine 1 en version allégée</p>
-      <ul class="recovery-actions">
-        <li>4 items/jour uniquement (Identité + Corps + Business + Mental)</li>
-        <li>Pas de culpabilité — c'est le système qui fonctionne</li>
-        <li>Remonter progressivement à 8 items</li>
-        <li>Source : Carl Rogers — l'acceptation est le premier pas du changement</li>
-      </ul>
-    </div>
-
-    <div style="background:var(--accent-glow);border:1px solid var(--accent);border-radius:var(--radius);padding:16px;margin-top:8px">
-      <p style="font-size:0.9rem;color:var(--text-muted)">
-        <strong style="color:var(--accent)">Rappel UCL :</strong> Il faut en moyenne 66 jours pour qu'un comportement devienne automatique.
-        Rater quelques jours ne remet pas tout à zéro. L'important est de reprendre, pas d'être parfait.
-      </p>
-    </div>
-  `;
+  document.getElementById('main').innerHTML = `
+    <div class="recov-card"><h4>1 jour rate <span class="sev sev-low">facile</span></h4>
+      <div class="recov-sub">Version minimale pour ne pas casser la chaine</div>
+      <ul class="recov-list"><li>10 squats</li><li>5 pompes</li><li>20 secondes de gainage</li><li>1 action business (un message suffit)</li></ul></div>
+    <div class="recov-card"><h4>3 jours rates <span class="sev sev-mid">modere</span></h4>
+      <div class="recov-sub">Reprise progressive sur 3 jours</div>
+      <ul class="recov-list"><li>Jour 1 : 1 seule action (la plus facile)</li><li>Jour 2 : 2 actions</li><li>Jour 3 : 3 actions, puis retour a la normale</li></ul></div>
+    <div class="recov-card"><h4>7 jours rates <span class="sev sev-hi">reset</span></h4>
+      <div class="recov-sub">Recommencer semaine 1 en version allegee</div>
+      <ul class="recov-list"><li>4 items/jour uniquement (Identite + Corps + Business + Mental)</li><li>Pas de culpabilite — c'est le systeme qui fonctionne</li><li>Remonter progressivement a 8 items</li><li>Source : Carl Rogers — l'acceptation est le premier pas du changement</li></ul></div>
+    <div class="note-box"><p><strong>rappel ucl</strong> — Il faut en moyenne 66 jours pour qu'un comportement devienne automatique. Rater quelques jours ne remet pas tout a zero. L'important est de reprendre, pas d'etre parfait.</p></div>`;
 }
 
-function renderAntiEcole() {
-  document.getElementById('tabContent').innerHTML = `
-    <div class="anti-ecole-section">
-      <h3>🛡️ Stratégie Anti-école</h3>
-      <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:16px">Protocole basé sur Harvard (règle des 3s) et Stanford (cues comportementaux)</p>
-
-      <div class="ae-phase">
-        <span class="ae-badge">AVANT</span>
-        <span class="ae-text">1 respiration 4-6 (inspirer 4s, expirer 6s) + phrase : «Je ne suis pas là pour être comme eux.»</span>
-      </div>
-
-      <div class="ae-phase">
-        <span class="ae-badge">PENDANT</span>
-        <span class="ae-text">Posture droite + règle des 3 secondes (ne pas réagir immédiatement) + phrase : «Je suis occupé.»</span>
-      </div>
-
-      <div class="ae-phase">
-        <span class="ae-badge">APRÈS</span>
-        <span class="ae-text">1 note sur ce qui s'est passé + 1 action concrète (business ou environnement)</span>
-      </div>
-
-      <div class="ae-phase">
-        <span class="ae-badge">SI GLISSE</span>
-        <span class="ae-text">Reset immédiat : 1 respiration 4-6 + 1 action minimale. Pas de culpabilité — Brené Brown dit que la vulnérabilité est un signe de force.</span>
-      </div>
+function renderAnti() {
+  document.getElementById('main').innerHTML = `
+    <div class="ae-section">
+      <h3>Strategie Anti-ecole</h3>
+      <div class="ae-sub">Protocole base sur Harvard (regle des 3s) et Stanford (cues comportementaux)</div>
+      <div class="ae-phase"><span class="ae-tag">AVANT</span><span class="ae-text">1 respiration 4-6 (inspirer 4s, expirer 6s) + phrase : «Je ne suis pas la pour etre comme eux.»</span></div>
+      <div class="ae-phase"><span class="ae-tag">PENDANT</span><span class="ae-text">Posture droite + regle des 3 secondes (ne pas reagir immediatement) + phrase : «Je suis occupe.»</span></div>
+      <div class="ae-phase"><span class="ae-tag">APRES</span><span class="ae-text">1 note sur ce qui s'est passe + 1 action concrete (business ou environnement)</span></div>
+      <div class="ae-phase"><span class="ae-tag">SI GLISSE</span><span class="ae-text">Reset immediat : 1 respiration 4-6 + 1 action minimale. Brene Brown dit que la vulnerabilite est un signe de force.</span></div>
     </div>
-
-    <div class="guide-section">
-      <h3>Sources de cette stratégie</h3>
-      <div style="display:grid;gap:8px">
-        <div style="padding:8px 0;border-bottom:1px solid var(--border)">
-          <strong style="font-size:0.9rem">Harvard Study</strong>
-          <p style="color:var(--text-muted);font-size:0.85rem">La règle des 3 secondes coupe l'impulsivité et permet de choisir une réponse plutôt que de réagir.</p>
-        </div>
-        <div style="padding:8px 0;border-bottom:1px solid var(--border)">
-          <strong style="font-size:0.9rem">Stanford Behavior Design Lab</strong>
-          <p style="color:var(--text-muted);font-size:0.85rem">Les cues environnementaux déclenchent les habitudes — en changeant les cues, on change le comportement.</p>
-        </div>
-        <div style="padding:8px 0;border-bottom:1px solid var(--border)">
-          <strong style="font-size:0.9rem">Charles Duhigg (The Power of Habit)</strong>
-          <p style="color:var(--text-muted);font-size:0.85rem">La boucle d'habitude (cue → routine → récompense) peut être reprogrammée avec une nouvelle routine.</p>
-        </div>
-        <div style="padding:8px 0">
-          <strong style="font-size:0.9rem">Brené Brown (Daring Greatly)</strong>
-          <p style="color:var(--text-muted);font-size:0.85rem">La vulnérabilité n'est pas une faiblesse — accepter ses moments de glisse est un acte de courage.</p>
-        </div>
-      </div>
-    </div>
-  `;
+    <div class="guide-card"><h3>Sources de cette strategie</h3>
+      <div class="guide-app"><h4>Harvard Study</h4><p>La regle des 3 secondes coupe l'impulsivite et permet de choisir une reponse plutot que de reagir.</p></div>
+      <div class="guide-app"><h4>Stanford Behavior Design Lab</h4><p>Les cues environnementaux declenchent les habitudes — en changeant les cues, on change le comportement.</p></div>
+      <div class="guide-app"><h4>Charles Duhigg</h4><p>La boucle d'habitude (cue → routine → recompense) peut etre reprogrammee avec une nouvelle routine.</p></div>
+      <div class="guide-app"><h4>Brene Brown</h4><p>La vulnerabilite n'est pas une faiblesse — accepter ses moments de glisse est un acte de courage.</p></div>
+    </div>`;
 }
 
 function renderSources() {
-  let html = '<div class="sources-grid">';
-  SOURCES.forEach((s, i) => {
-    html += `<div class="source-card">
-      <div class="source-name">${i+1}. ${s.name}</div>
-      <div class="source-work">${s.work}</div>
-      <div class="source-topic">${s.topic}</div>
-    </div>`;
+  let o = '<div class="src-grid">';
+  SRC.forEach((s,i) => {
+    o += `<div class="src-card"><div class="src-num">${String(i+1).padStart(2,'0')}</div><div class="src-name">${s.n}</div><div class="src-work">${s.w}</div><div class="src-topic">${s.t}</div></div>`;
   });
-  html += '</div>';
-  document.getElementById('tabContent').innerHTML = html;
+  o += '</div>';
+  document.getElementById('main').innerHTML = o;
 }
 
 function renderGuide() {
-  document.getElementById('tabContent').innerHTML = `
-    <div class="guide-section">
-      <h3>📱 Guide de configuration par application</h3>
-      <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:16px">Comment reproduire ce système dans les applications populaires de suivi d'habitudes</p>
-
-      <div class="guide-app">
-        <h4>🎯 Lovable (App personnalisée)</h4>
-        <p>Idéal pour créer exactement ce système avec le prompt complet.</p>
-        <ol class="guide-steps">
-          <li data-step="1.">Copier le prompt entier du fichier habits-config.json</li>
-          <li data-step="2.">Coller dans Lovable pour générer l'app</li>
-          <li data-step="3.">Personnaliser les couleurs et notifications</li>
-          <li data-step="4.">Déployer sur ton téléphone</li>
-        </ol>
-      </div>
-
-      <div class="guide-app">
-        <h4>✅ TickTick</h4>
-        <p>Habits + tâches + rappels intégrés.</p>
-        <ol class="guide-steps">
-          <li data-step="1.">Créer 8 habitudes dans l'onglet Habits</li>
-          <li data-step="2.">Configurer les rappels : 07:30, 08:00, 12:00, 20:00</li>
-          <li data-step="3.">Ajouter les descriptions comme notes de chaque habitude</li>
-          <li data-step="4.">Créer une tâche récurrente «Validation hebdo» chaque dimanche à 20h</li>
-          <li data-step="5.">Utiliser les tags pour catégoriser (matin/midi/soir)</li>
-        </ol>
-      </div>
-
-      <div class="guide-app">
-        <h4>⚔️ Habitica</h4>
-        <p>Gamification + rappels — transforme les habitudes en quête RPG.</p>
-        <ol class="guide-steps">
-          <li data-step="1.">Créer 8 Daily tasks (pas Habits ni To-Dos)</li>
-          <li data-step="2.">Configurer la difficulté : Facile pour Image/Environnement, Moyen pour Corps/Business, Difficile pour Identité/Mental</li>
-          <li data-step="3.">Ajouter les «Pourquoi» dans les notes de chaque task</li>
-          <li data-step="4.">Utiliser les checklists pour les sous-actions (ex: 10 squats, 5 pompes, 20s gainage)</li>
-          <li data-step="5.">Configurer les rappels via notifications push</li>
-        </ol>
-      </div>
-
-      <div class="guide-app">
-        <h4>🔄 Loop Habit Tracker (Android, gratuit)</h4>
-        <p>Simple, gratuit, avec graphiques intégrés.</p>
-        <ol class="guide-steps">
-          <li data-step="1.">Créer 8 habitudes avec fréquence «Tous les jours»</li>
-          <li data-step="2.">Configurer les rappels individuels par habitude</li>
-          <li data-step="3.">Ajouter les descriptions dans les notes</li>
-          <li data-step="4.">Utiliser les graphiques intégrés pour le suivi (histogramme + score)</li>
-          <li data-step="5.">Exporter les données CSV pour analyse approfondie</li>
-        </ol>
-      </div>
-
-      <div class="guide-app">
-        <h4>📊 Track & Graph</h4>
-        <p>Graphiques détaillés et personnalisables.</p>
-        <ol class="guide-steps">
-          <li data-step="1.">Créer 8 trackers de type «Oui/Non»</li>
-          <li data-step="2.">Configurer un graphique ligne pour la progression globale</li>
-          <li data-step="3.">Créer un graphique en barres pour les 8 items quotidiens</li>
-          <li data-step="4.">Ajouter un graphique camembert pour la validation hebdo</li>
-          <li data-step="5.">Utiliser les rappels intégrés aux 4 horaires</li>
-        </ol>
-      </div>
+  document.getElementById('main').innerHTML = `
+    <div class="guide-card"><h3>Configuration par application</h3>
+      <div class="guide-app"><h4>Lovable</h4><p>App personnalisee avec le prompt complet.</p>
+        <ol class="steps"><li>Copier le fichier habits-config.json</li><li>Coller dans Lovable pour generer l'app</li><li>Personnaliser les couleurs et notifications</li><li>Deployer sur ton telephone</li></ol></div>
+      <div class="guide-app"><h4>TickTick</h4><p>Habits + taches + rappels integres.</p>
+        <ol class="steps"><li>Creer 8 habitudes dans l'onglet Habits</li><li>Configurer les rappels : 07:30, 08:00, 12:00, 20:00</li><li>Ajouter les descriptions comme notes</li><li>Creer une tache recurrente Validation hebdo chaque dimanche 20h</li><li>Utiliser les tags pour categoriser (matin/midi/soir)</li></ol></div>
+      <div class="guide-app"><h4>Habitica</h4><p>Gamification + rappels.</p>
+        <ol class="steps"><li>Creer 8 Daily tasks (pas Habits ni To-Dos)</li><li>Difficulte : Facile pour Image/Environnement, Moyen pour Corps/Business, Difficile pour Identite/Mental</li><li>Ajouter les Pourquoi dans les notes</li><li>Utiliser les checklists pour sous-actions (10 squats, 5 pompes, 20s gainage)</li><li>Configurer les rappels push</li></ol></div>
+      <div class="guide-app"><h4>Loop Habit Tracker</h4><p>Simple, gratuit, avec graphiques integres (Android).</p>
+        <ol class="steps"><li>Creer 8 habitudes Oui/Non, frequence quotidienne</li><li>Configurer les rappels individuels par habitude</li><li>Ajouter descriptions dans les notes</li><li>Utiliser histogramme + score pour le suivi</li><li>Export CSV pour analyse approfondie</li></ol></div>
+      <div class="guide-app"><h4>Track &amp; Graph</h4><p>Graphiques detailles et personnalisables.</p>
+        <ol class="steps"><li>Creer 8 trackers Oui/Non</li><li>Graphique ligne pour progression globale</li><li>Graphique barres pour les 8 items quotidiens</li><li>Graphique camembert pour validation hebdo</li><li>Rappels integres aux 4 horaires</li></ol></div>
     </div>
-
-    <div class="guide-section">
-      <h3>⏰ Rappels à configurer</h3>
-      <div style="display:grid;gap:8px">
-        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
-          <span style="color:var(--text-muted)">07:30 — Anti-école</span>
-          <span style="color:var(--accent)">🛡️</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
-          <span style="color:var(--text-muted)">08:00 — Identité + Corps + Image</span>
-          <span style="color:var(--accent)">🪞💪👔</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
-          <span style="color:var(--text-muted)">12:00 — Business + Environnement</span>
-          <span style="color:var(--accent)">💼🏠</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
-          <span style="color:var(--text-muted)">20:00 — Mental + Sommeil</span>
-          <span style="color:var(--accent)">🧠😴</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;padding:8px 0">
-          <span style="color:var(--text-muted)">Dimanche 20:00 — Validation hebdo</span>
-          <span style="color:var(--accent)">📋</span>
-        </div>
-      </div>
-    </div>
-  `;
+    <div class="guide-card"><h3>Rappels a configurer</h3>
+      <div class="reminder-row"><span class="reminder-time">07:30</span><span class="reminder-what">Anti-ecole</span></div>
+      <div class="reminder-row"><span class="reminder-time">08:00</span><span class="reminder-what">Identite + Corps + Image</span></div>
+      <div class="reminder-row"><span class="reminder-time">12:00</span><span class="reminder-what">Business + Environnement</span></div>
+      <div class="reminder-row"><span class="reminder-time">20:00</span><span class="reminder-what">Mental + Sommeil</span></div>
+      <div class="reminder-row"><span class="reminder-time">dim 20:00</span><span class="reminder-what">Validation hebdomadaire</span></div>
+    </div>`;
 }
 
-function render() {
-  renderStats();
-  const tabs = { daily: renderDaily, weekly: renderWeekly, charts: renderCharts, recovery: renderRecovery, 'anti-ecole': renderAntiEcole, sources: renderSources, guide: renderGuide };
-  if (tabs[currentTab]) tabs[currentTab]();
-}
+const views = { daily: renderDaily, weekly: renderWeekly, charts: renderCharts, recovery: renderRecovery, anti: renderAnti, sources: renderSources, guide: renderGuide };
 
-document.getElementById('navTabs').addEventListener('click', e => {
-  if (e.target.classList.contains('nav-tab')) {
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    e.target.classList.add('active');
-    currentTab = e.target.dataset.tab;
-    render();
-  }
+function render() { renderStats(); if (views[curTab]) views[curTab](); }
+
+document.getElementById('tabs').addEventListener('click', e => {
+  if (!e.target.classList.contains('tab')) return;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  e.target.classList.add('active');
+  curTab = e.target.dataset.t;
+  render();
 });
 
-getStartDate();
 render();
 </script>
 </body>
