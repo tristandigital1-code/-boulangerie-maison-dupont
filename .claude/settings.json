@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "vapi": {
+      "type": "url",
+      "url": "https://mcp.vapi.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer VOTRE_CLE_PRIVEE_VAPI_ICI"
+      }
+    }
+  }
+}
