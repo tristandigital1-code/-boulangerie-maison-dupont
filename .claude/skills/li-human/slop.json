@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "note": "Lexicon used by humanize.py and detect.py. Replacements are plain-English and keep the sentence grammatical. Edit freely - it is meant to be yours.",
+  "note": "Lexicon used by humanize.py and detect.py. Replacements are plain-English and keep the sentence grammatical. Edit freely - it is meant to be yours. FR: entries tagged \"lang\": \"fr\" were added locally for a French-language LinkedIn account. Edit or remove them freely; nothing else depends on the tag.",
   "invisible": [
     {
       "cp": "U+200B",
@@ -550,6 +550,240 @@
       "find": "it is worth noting that",
       "replace": "note that",
       "family": "connectives"
+    },
+    {
+      "find": "robuste",
+      "replace": "solide",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "incontournable",
+      "replace": "important",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "révolutionnaire",
+      "replace": "nouveau",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "innovant",
+      "replace": "nouveau",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "disruptif",
+      "replace": "nouveau",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "impactant",
+      "replace": "fort",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "holistique",
+      "replace": "global",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "pérenne",
+      "replace": "durable",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "proactif",
+      "replace": "en avance",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "véritable",
+      "replace": "vrai",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "booster",
+      "replace": "augmenter",
+      "family": "verbs",
+      "lang": "fr"
+    },
+    {
+      "find": "optimiser",
+      "replace": "améliorer",
+      "family": "verbs",
+      "lang": "fr"
+    },
+    {
+      "find": "impulser",
+      "replace": "lancer",
+      "family": "verbs",
+      "lang": "fr"
+    },
+    {
+      "find": "challenger",
+      "replace": "remettre en question",
+      "family": "verbs",
+      "lang": "fr"
+    },
+    {
+      "find": "synergie",
+      "replace": "coopération",
+      "family": "nouns",
+      "lang": "fr"
+    },
+    {
+      "find": "écosystème",
+      "replace": "milieu",
+      "family": "nouns",
+      "lang": "fr"
+    },
+    {
+      "find": "expertise",
+      "replace": "compétence",
+      "family": "nouns",
+      "lang": "fr"
+    },
+    {
+      "find": "décryptage",
+      "replace": "résumé",
+      "family": "nouns",
+      "lang": "fr"
+    },
+    {
+      "find": "innovante",
+      "replace": "nouvelle",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "innovants",
+      "replace": "nouveaux",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "innovantes",
+      "replace": "nouvelles",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "robustes",
+      "replace": "solides",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "incontournables",
+      "replace": "importants",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "révolutionnaires",
+      "replace": "nouveaux",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "disruptive",
+      "replace": "nouvelle",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "disruptifs",
+      "replace": "nouveaux",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "disruptives",
+      "replace": "nouvelles",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "impactante",
+      "replace": "forte",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "impactants",
+      "replace": "forts",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "impactantes",
+      "replace": "fortes",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "holistiques",
+      "replace": "globaux",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "pérennes",
+      "replace": "durables",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "proactive",
+      "replace": "en avance",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "proactifs",
+      "replace": "en avance",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "proactives",
+      "replace": "en avance",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "véritables",
+      "replace": "vrais",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "synergies",
+      "replace": "coopérations",
+      "family": "nouns",
+      "lang": "fr"
+    },
+    {
+      "find": "écosystèmes",
+      "replace": "milieux",
+      "family": "nouns",
+      "lang": "fr"
+    },
+    {
+      "find": "compétences clés",
+      "replace": "compétences",
+      "family": "adjectives",
+      "lang": "fr"
     }
   ],
   "phrases": [
@@ -712,6 +946,204 @@
       "find": "who's with me",
       "replace": "",
       "family": "closers"
+    },
+    {
+      "find": "dans un monde en constante evolution",
+      "replace": "aujourd'hui",
+      "family": "openers",
+      "lang": "fr"
+    },
+    {
+      "find": "dans un monde en constante évolution",
+      "replace": "aujourd'hui",
+      "family": "openers",
+      "lang": "fr"
+    },
+    {
+      "find": "en constante évolution",
+      "replace": "qui change vite",
+      "family": "connectives",
+      "lang": "fr"
+    },
+    {
+      "find": "à l'ère du numérique",
+      "replace": "aujourd'hui",
+      "family": "openers",
+      "lang": "fr"
+    },
+    {
+      "find": "à l'heure actuelle",
+      "replace": "aujourd'hui",
+      "family": "openers",
+      "lang": "fr"
+    },
+    {
+      "find": "de nos jours",
+      "replace": "aujourd'hui",
+      "family": "openers",
+      "lang": "fr"
+    },
+    {
+      "find": "plus que jamais",
+      "replace": "aujourd'hui",
+      "family": "connectives",
+      "lang": "fr"
+    },
+    {
+      "find": "force est de constater que",
+      "replace": "visiblement,",
+      "family": "connectives",
+      "lang": "fr"
+    },
+    {
+      "find": "il est crucial de",
+      "replace": "il faut",
+      "family": "connectives",
+      "lang": "fr"
+    },
+    {
+      "find": "il est essentiel de",
+      "replace": "il faut",
+      "family": "connectives",
+      "lang": "fr"
+    },
+    {
+      "find": "il est important de noter que",
+      "replace": "à noter :",
+      "family": "connectives",
+      "lang": "fr"
+    },
+    {
+      "find": "il va sans dire que",
+      "replace": "",
+      "family": "connectives",
+      "lang": "fr"
+    },
+    {
+      "find": "en d'autres termes",
+      "replace": "autrement dit",
+      "family": "connectives",
+      "lang": "fr"
+    },
+    {
+      "find": "la clé réside dans",
+      "replace": "ce qui compte, c'est",
+      "family": "connectives",
+      "lang": "fr"
+    },
+    {
+      "find": "s'articule autour de",
+      "replace": "repose sur",
+      "family": "verbs",
+      "lang": "fr"
+    },
+    {
+      "find": "mettre en lumière",
+      "replace": "montrer",
+      "family": "verbs",
+      "lang": "fr"
+    },
+    {
+      "find": "plonger dans",
+      "replace": "regarder",
+      "family": "verbs",
+      "lang": "fr"
+    },
+    {
+      "find": "explorons ensemble",
+      "replace": "regardons",
+      "family": "verbs",
+      "lang": "fr"
+    },
+    {
+      "find": "sans plus attendre",
+      "replace": "",
+      "family": "connectives",
+      "lang": "fr"
+    },
+    {
+      "find": "tour d'horizon",
+      "replace": "aperçu",
+      "family": "nouns",
+      "lang": "fr"
+    },
+    {
+      "find": "valeur ajoutée",
+      "replace": "utilité",
+      "family": "nouns",
+      "lang": "fr"
+    },
+    {
+      "find": "solution clé en main",
+      "replace": "solution prête",
+      "family": "nouns",
+      "lang": "fr"
+    },
+    {
+      "find": "véritable révolution",
+      "replace": "vraie rupture",
+      "family": "nouns",
+      "lang": "fr"
+    },
+    {
+      "find": "c'est dans notre ADN",
+      "replace": "c'est notre façon de faire",
+      "family": "closers",
+      "lang": "fr"
+    },
+    {
+      "find": "je suis ravi de vous annoncer",
+      "replace": "j'annonce",
+      "family": "openers",
+      "lang": "fr"
+    },
+    {
+      "find": "je suis fier de vous annoncer",
+      "replace": "j'annonce",
+      "family": "openers",
+      "lang": "fr"
+    },
+    {
+      "find": "c'est avec une immense fierté que",
+      "replace": "",
+      "family": "openers",
+      "lang": "fr"
+    },
+    {
+      "find": "un immense merci à",
+      "replace": "merci à",
+      "family": "closers",
+      "lang": "fr"
+    },
+    {
+      "find": "n'hésitez pas à",
+      "replace": "vous pouvez",
+      "family": "closers",
+      "lang": "fr"
+    },
+    {
+      "find": "partagez en commentaire",
+      "replace": "",
+      "family": "closers",
+      "lang": "fr"
+    },
+    {
+      "find": "riche en enseignements",
+      "replace": "instructif",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "à forte valeur ajoutée",
+      "replace": "utile",
+      "family": "adjectives",
+      "lang": "fr"
+    },
+    {
+      "find": "passionné par",
+      "replace": "je travaille sur",
+      "family": "openers",
+      "lang": "fr"
     }
   ],
   "structures": [
@@ -780,6 +1212,48 @@
       "regex": "(?i)\\b(?:agree\\?|thoughts\\?|who else\\b|am i wrong\\?)\\s*$",
       "name": "Reflex engagement bait",
       "fix": "Ask a question only you could ask, about the specific thing above it."
+    },
+    {
+      "id": "fr-ce-nest-pas",
+      "name": "\"Ce n'est pas X, c'est Y\" (FR)",
+      "regex": "(?i)\\bce n'?est pas (?:juste |seulement |qu'?)?[^.!?\\n]{2,60}[,.] c'?est\\b",
+      "fix": "Dis la seule chose que tu penses vraiment. Supprime la première moitié.",
+      "lang": "fr"
+    },
+    {
+      "id": "fr-non-seulement",
+      "name": "\"Non seulement X mais aussi Y\" (FR)",
+      "regex": "(?i)\\bnon seulement\\b[^.!?\\n]{2,80}\\bmais (?:aussi|également)\\b",
+      "fix": "Garde le second membre. Le premier ne sert qu'à équilibrer la phrase.",
+      "lang": "fr"
+    },
+    {
+      "id": "fr-engagement-bait",
+      "name": "Appel à commentaire réflexe (FR)",
+      "regex": "(?i)(?:qu'en pensez-vous\\s*\\?|et vous\\s*\\?|et toi\\s*\\?|je me trompe\\s*\\?|d'accord avec moi\\s*\\?|dites-moi en commentaire)\\s*$",
+      "fix": "Pose une question que toi seul pouvais poser, sur la chose précise juste au-dessus.",
+      "lang": "fr"
+    },
+    {
+      "id": "fr-rhetorical-line",
+      "name": "Question rhétorique d'une ligne (FR)",
+      "regex": "(?i)^\\s*(?:le résultat|le plus beau|la suite|le problème|la bonne nouvelle)\\s*\\?\\s*$",
+      "fix": "Supprime la ligne. La phrase suivante se suffit.",
+      "lang": "fr"
+    },
+    {
+      "id": "fr-in-summary",
+      "name": "Conclusion de dissertation (FR)",
+      "regex": "(?i)^\\s*(?:en conclusion|pour conclure|en résumé|pour résumer|en somme)\\b",
+      "fix": "Un post LinkedIn n'a pas de conclusion. Termine sur la dernière idée utile.",
+      "lang": "fr"
+    },
+    {
+      "id": "fr-triad",
+      "name": "Énumération en trois temps (FR)",
+      "regex": "\\b\\w+, \\w+ et \\w+\\.",
+      "fix": "Garde le terme le plus fort des trois. Les deux autres diluent.",
+      "lang": "fr"
     }
   ]
 }

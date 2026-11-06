@@ -41,18 +41,38 @@ python3 .claude/skills/li-human/detect.py avant.txt apres.txt
 
 Le lexique (`li-human/slop.json`, 113 termes) est fait pour être édité.
 
-## À faire avant la première utilisation
+## Adaptation française
 
-Remplir `.claude/linkedin/voice.md` : tous les skills le lisent. Les skills
-cherchent ce fichier à son chemin par défaut `~/.claude/linkedin/voice.md` —
-en session locale, faites une fois :
+Trois choses ont été ajoutées par-dessus le pack d'origine :
+
+1. **`.claude/linkedin/voice.md`** est rempli : agents vocaux IA,
+   réceptionnistes, cible dirigeants de petites structures, vouvoiement.
+   Les parties `{{...}}` restent à compléter, en priorité « Proof I can use ».
+2. **`.claude/linkedin/prompts-fr.md`** : les prompts prêts à coller, avec la
+   langue de sortie déjà précisée. Les skills étant en anglais, sans cette
+   précision les brouillons reviennent en anglais.
+3. **Le lexique `li-human/slop.json` a été étendu au français** : 98 entrées
+   `"lang": "fr"` (tics du type « dans un monde en constante évolution »,
+   « n'hésitez pas à », « incontournable ») et 6 tournures signalées
+   (« ce n'est pas X, c'est Y », « qu'en pensez-vous ? », énumérations en
+   trois temps). Le fichier est fait pour être modifié : ajoutez vos propres
+   tics au fur et à mesure que vous les repérez.
+
+Les skills cherchent le fichier voix à son chemin par défaut
+`~/.claude/linkedin/voice.md`. En session locale, à faire une fois :
 
 ```bash
 mkdir -p ~/.claude/linkedin && ln -sf "$PWD/.claude/linkedin/voice.md" ~/.claude/linkedin/voice.md
 ```
 
-Alternative : coller trois de vos propres posts dans Claude et demander
-« écris mon voice.md à partir de ces posts ».
+### Deux limites du nettoyage en français
+
+- Le remplacement se fait mot à mot, donc **l'accord peut sauter** (« une
+  véritable révolution » devient « une vraie rupture », mais une tournure plus
+  rare peut produire un accord faux). Relisez la sortie de `humanize.py`.
+- Les **espaces insécables** que la typographie française met avant `: ; ! ?`
+  sont transformées en espaces normales, parce que ce sont des caractères qui
+  servent aussi d'empreinte machine. Sans conséquence sur LinkedIn.
 
 ## Limite assumée en amont
 
