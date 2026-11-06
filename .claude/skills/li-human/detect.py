@@ -33,11 +33,38 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 LEX = os.path.join(HERE, "slop.json")
 
 SENT_RE = re.compile(r"[^.!?\n]+[.!?]*")
-WORD_RE = re.compile(r"[A-Za-z']+")
+# Unicode-aware: "manqué" is one word, "l'appelant" and "don't" are one each.
+WORD_RE = re.compile(r"[^\W\d_]+(?:['’][^\W\d_]+)*")
 CONTRACTIONS = re.compile(r"\b\w+'(?:s|t|re|ve|ll|d|m)\b", re.IGNORECASE)
 PRONOUNS = re.compile(r"\b(i|me|my|mine|we|us|our|you|your)\b", re.IGNORECASE)
 NUMBERS = re.compile(r"\b\d[\d,.]*%?\b|\$\d")
 PROPER = re.compile(r"(?<![.!?]\s)(?<!^)\b[A-Z][a-z]{2,}\b", re.MULTILINE)
+
+# --- French support -------------------------------------------------------
+# CONTRACTIONS and PRONOUNS above only ever match English, so a French post
+# scored 0 on both and VOICE could not rise above 30 however human it was.
+# The French equivalents below are selected per text, so English scoring is
+# byte-for-byte unchanged.
+FR_ELISIONS = re.compile(r"\b(?:c|d|j|l|m|n|s|t|qu)['’](?=[^\W\d_])",
+                         re.IGNORECASE)
+FR_PRONOUNS = re.compile(
+    r"\b(je|j|me|moi|mon|ma|mes|nous|notre|nos|vous|votre|vos|on|tu|te|toi|"
+    r"ton|ta|tes)\b", re.IGNORECASE)
+# Function words that are common in French and rare or absent in English.
+FR_MARKERS = re.compile(
+    r"\b(le|la|les|un|une|des|du|de|et|est|sont|que|qui|pour|dans|pas|plus|"
+    r"vous|nous|votre|avec|sur|par|mais|ce|cette|son|ses|leur|leurs)\b",
+    re.IGNORECASE)
+EN_MARKERS = re.compile(
+    r"\b(the|and|of|to|is|are|that|this|with|for|but|not|you|your|it|from|"
+    r"have|has|was|were|they|their)\b", re.IGNORECASE)
+
+
+def is_french(text):
+    """True when the text looks French. Decides which VOICE regexes apply."""
+    fr = len(FR_MARKERS.findall(text))
+    en = len(EN_MARKERS.findall(text))
+    return fr > en
 
 
 def clamp(n):
@@ -124,8 +151,14 @@ def check_voice(text, lex):
     if len(w) < 25:
         return 50.0, "too short to judge"
     per100 = 100 / len(w)
-    contractions = len(CONTRACTIONS.findall(text)) * per100
-    person = len(PRONOUNS.findall(text)) * per100
+    if is_french(text):
+        # Elision ("c'est", "n'obtient", "qu'on") is the French equivalent of
+        # an English contraction: the spoken form, which models under-use.
+        contractions = len(FR_ELISIONS.findall(text)) * per100
+        person = len(FR_PRONOUNS.findall(text)) * per100
+    else:
+        contractions = len(CONTRACTIONS.findall(text)) * per100
+        person = len(PRONOUNS.findall(text)) * per100
     tells = 0
     names = []
     for s in lex["structures"]:

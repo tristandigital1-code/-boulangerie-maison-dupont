@@ -51,9 +51,9 @@ Trois choses ont été ajoutées par-dessus le pack d'origine :
 2. **`.claude/linkedin/prompts-fr.md`** : les prompts prêts à coller, avec la
    langue de sortie déjà précisée. Les skills étant en anglais, sans cette
    précision les brouillons reviennent en anglais.
-3. **Le lexique `li-human/slop.json` a été étendu au français** : 98 entrées
+3. **Le lexique `li-human/slop.json` a été étendu au français** : 78 entrées
    `"lang": "fr"` (tics du type « dans un monde en constante évolution »,
-   « n'hésitez pas à », « incontournable ») et 6 tournures signalées
+   « n'hésitez pas à », « incontournable ») dont 6 tournures signalées
    (« ce n'est pas X, c'est Y », « qu'en pensez-vous ? », énumérations en
    trois temps). Le fichier est fait pour être modifié : ajoutez vos propres
    tics au fur et à mesure que vous les repérez.
@@ -64,6 +64,23 @@ Les skills cherchent le fichier voix à son chemin par défaut
 ```bash
 mkdir -p ~/.claude/linkedin && ln -sf "$PWD/.claude/linkedin/voice.md" ~/.claude/linkedin/voice.md
 ```
+
+### Correction apportée à `detect.py`
+
+Deux des cinq contrôles étaient codés pour l'anglais uniquement :
+
+- `CONTRACTIONS` cherchait `don't`, `it's`. Les élisions françaises
+  (`c'est`, `n'obtient`, `qu'on`) ne comptaient pas.
+- `PRONOUNS` cherchait `i, me, my, we, you`. Les pronoms français
+  (`je, vous, nous, on`) ne comptaient pas.
+
+Conséquence : le contrôle VOICE plafonnait à 30/100 sur un texte français,
+même parfaitement humain, et le verdict global ne pouvait jamais passer.
+
+`detect.py` choisit maintenant le jeu d'expressions selon la langue détectée
+(fonction `is_french`). Sur un post français réel, VOICE est passé de 30,0 à
+94,9. **Le scoring anglais est inchangé** (texte de contrôle : 12,2 → 12,5,
+l'écart venant du découpage en mots devenu compatible avec les accents).
 
 ### Deux limites du nettoyage en français
 
