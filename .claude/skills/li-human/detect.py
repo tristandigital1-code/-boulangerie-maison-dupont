@@ -37,7 +37,12 @@ SENT_RE = re.compile(r"[^.!?\n]+[.!?]*")
 WORD_RE = re.compile(r"[^\W\d_]+(?:['’][^\W\d_]+)*")
 CONTRACTIONS = re.compile(r"\b\w+'(?:s|t|re|ve|ll|d|m)\b", re.IGNORECASE)
 PRONOUNS = re.compile(r"\b(i|me|my|mine|we|us|our|you|your)\b", re.IGNORECASE)
-NUMBERS = re.compile(r"\b\d[\d,.]*%?\b|\$\d")
+# Plain numbers, plus the French-formatted ones the original missed:
+# "10h", "14h30", "3 500 €", "20 min". Without these, a French post full of
+# real figures still scored 0 on SPECIFICITY.
+NUMBERS = re.compile(
+    r"\b\d[\d,.]*%?\b|\$\d|\b\d{1,2}h(?:\d{2})?\b|"
+    r"\b\d[\d\s.,]*\s?(?:€|k€|min|%)")
 PROPER = re.compile(r"(?<![.!?]\s)(?<!^)\b[A-Z][a-z]{2,}\b", re.MULTILINE)
 
 # --- French support -------------------------------------------------------
