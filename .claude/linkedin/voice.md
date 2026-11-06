@@ -89,15 +89,51 @@ démo, dans la phrase elle-même. « Sur ma démo » ou « en test chez moi », 
 « chez un client ». Un chiffre honnêtement étiqueté vaut mieux qu'un chiffre
 flou, et infiniment mieux qu'un chiffre faux.
 
+### Ce que fait l'agent de démonstration
+
+Agent vocal de démonstration pour une **agence immobilière fictive**. Ce
+qu'il fait réellement, dans la démo :
+
+- Il décroche et tient une conversation au téléphone.
+- Il répond aux questions fréquentes à partir d'une **base de connaissances**
+  sur l'agence : informations sur l'entreprise, horaires, fonctionnement.
+- Il aide et oriente l'appelant aussi loin que la base de connaissances le
+  permet.
+- Il qualifie l'appelant. *(à confirmer : jusqu'où exactement ?)*
+
+### Ce qu'il ne fait pas dans la démo, et qu'il ne faut jamais laisser croire
+
+- **Il ne prend pas réellement de rendez-vous.** À l'oral il dit « c'est
+  noté », mais rien ne s'écrit nulle part. Il n'y a pas d'agenda derrière.
+- La prise de rendez-vous réelle suppose de le **connecter à un calendrier**,
+  et cette connexion fait partie de la prestation payante, pas de la démo.
+
+Deux conséquences, et ce sont des règles, pas des conseils :
+
+1. **Aucun post ne doit dire ou laisser entendre que l'agent prend des
+   rendez-vous**, tant que la phrase ne précise pas « une fois connecté à
+   votre agenda ». Sinon c'est une promesse que la démo ne tient pas, et le
+   premier prospect qui teste le verra.
+2. **En démonstration devant un prospect, dites-le à voix haute** au moment
+   où l'agent annonce un rendez-vous : « là il vous confirme, mais dans la
+   démo rien n'est écrit dans un agenda ». Ça vous coûte cinq secondes et ça
+   vous évite de passer pour quelqu'un qui enjolive.
+
+### Les chiffres, toujours manquants
+
 - `{{nombre d'appels que votre démo a traités, et sur combien de temps}}`
 - `{{le temps de réponse de l'agent, en secondes}}`
 - `{{le temps qu'il vous faut pour mettre un agent en service, du premier
   échange à la première prise d'appel}}`
-- `{{ce que l'agent sait faire exactement : prendre un rendez-vous de visite ?
-  qualifier un acquéreur ? transférer un vendeur ? donner les horaires ?}}`
 
-Ce dernier point n'est pas un chiffre mais c'est le plus demandé en
-commentaire. Remplissez-le en premier.
+### Un angle de contenu déjà exploitable
+
+Vous aviez des démos sur plusieurs niches et vous vous concentrez maintenant
+sur une seule. **C'est un post en soi**, et il est plus crédible que
+n'importe quel chiffre : ce que vous avez vu en faisant des agents pour
+plusieurs métiers, et pourquoi vous avez fini par n'en garder qu'un. C'est
+une décision réelle, qui vous a coûté quelque chose, et vous êtes le seul à
+pouvoir la raconter. Formule #20 « Le renoncement » dans `hooks.json`.
 
 ## Thèmes de départ
 
