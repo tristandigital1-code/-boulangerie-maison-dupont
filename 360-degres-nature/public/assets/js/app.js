@@ -1343,6 +1343,74 @@
       '<p>Astuce : gardez toujours une copie de vos exports. Sur un autre appareil, utilisez « Importer une sauvegarde » pour retrouver votre travail.</p></div>');
   }
 
+  /* ---------------- « Télécharger le site modifié » : un seul fichier index.html ---------------- */
+  // Produit une copie autonome du site (CSS, JS, photos, PDF intégrés) contenant toutes les modifications.
+  async function toDataURL(url) {
+    var r = await fetch(url);
+    if (!r.ok) throw new Error(url);
+    return blobToDataURL(await r.blob());
+  }
+  async function saveSiteHtml() {
+    try {
+      setStatus('Préparation du fichier…');
+      toast('Préparation du site modifié…');
+      // 1. Données : médias locaux et chemins relatifs → intégrés
+      var data = clone(S);
+      data.updatedAt = S.updatedAt;
+      await mapStringsAsync(data, async function (s) {
+        if (s.indexOf('idb:') === 0) { var rec = await getMediaRec(s); return rec && rec.blob ? await blobToDataURL(rec.blob) : ''; }
+        if (/^(assets|data)\/[^\s"']+\.(jpe?g|png|webp|gif|pdf)$/i.test(s)) { try { return await toDataURL(s); } catch (e) { return s; } }
+        return s;
+      });
+      // 2. Copie propre de la page
+      var doc = document.documentElement.cloneNode(true);
+      var body = doc.querySelector('body');
+      body.classList.remove('admin');
+      body.removeAttribute('style');
+      doc.removeAttribute('style');
+      doc.querySelectorAll('[contenteditable]').forEach(function (el) { el.removeAttribute('contenteditable'); el.removeAttribute('spellcheck'); });
+      doc.querySelector('#adminbar').hidden = true;
+      var m = doc.querySelector('#modal'); m.hidden = true; m.querySelector('#modalBody').innerHTML = '';
+      doc.querySelector('#toast').className = 'toast';
+      doc.querySelectorAll('script[src*="xlsx"]').forEach(function (s) { s.remove(); });
+      doc.querySelectorAll('.drop-hover').forEach(function (el) { el.classList.remove('drop-hover'); });
+      // contenu dynamique vidé : il est reconstruit au chargement
+      ['#platforms', '#player', '#featureLinks', '#shows', '#episodes', '#spFilters', '#spGrid', '#obsGrid', '#aboutChips', '#aboutPhoto', '#footListen', '#footMail'].forEach(function (sel) { var el = doc.querySelector(sel); if (el) el.innerHTML = ''; });
+      doc.querySelector('#heroBg').removeAttribute('style');
+      // 3. Données du site
+      var sd = doc.querySelector('#site-data');
+      sd.removeAttribute('src');
+      sd.textContent = '\nwindow.DEFAULT_SITE_DATA = ' + JSON.stringify(data).replace(/<\//g, '<\\/') + ';\n';
+      // 4. CSS, scripts et images encore externes → intégrés
+      for (var l of Array.prototype.slice.call(doc.querySelectorAll('link[rel="stylesheet"][href]'))) {
+        if (/^https?:/i.test(l.getAttribute('href'))) continue;
+        var st = document.createElement('style'); st.textContent = await (await fetch(l.getAttribute('href'))).text(); l.replaceWith(st);
+      }
+      for (var sc of Array.prototype.slice.call(doc.querySelectorAll('script[src]'))) {
+        if (/^https?:/i.test(sc.getAttribute('src'))) continue;
+        var code = await (await fetch(sc.getAttribute('src'))).text();
+        sc.removeAttribute('src'); sc.textContent = '\n' + code.replace(/<\/script/gi, '<\\/script') + '\n';
+      }
+      for (var el of Array.prototype.slice.call(doc.querySelectorAll('img[src], link[rel="icon"][href]'))) {
+        var attr = el.tagName === 'IMG' ? 'src' : 'href', v = el.getAttribute(attr);
+        if (v && !/^(data:|https?:|blob:)/i.test(v)) { try { el.setAttribute(attr, await toDataURL(v)); } catch (e) { /* */ } }
+      }
+      doc.querySelectorAll('meta[property="og:image"]').forEach(function (x) { x.remove(); });
+      var html = '<!DOCTYPE html>\n' + doc.outerHTML;
+      downloadFile(html, 'index.html', 'text/html;charset=utf-8');
+      setStatus('✓ Site téléchargé (index.html)');
+      openModal('Site modifié téléchargé ✓', '<div class="help"><p>Le fichier <b>index.html</b> contient tout le site avec vos modifications (textes, fiches, photos, PDF).</p><ol>' +
+        '<li>Mettez <b>index.html</b> seul dans un dossier (ex. « site-360 »).</li>' +
+        '<li>Sur <b>app.netlify.com</b> → votre site → onglet <b>Deploys</b> → glissez ce dossier dans la zone « Drag and drop ».</li>' +
+        '<li>C\'est en ligne en quelques secondes, gratuitement.</li></ol>' +
+        '<p>Pour la prochaine modification : ouvrez ce même fichier index.html, passez en mode édition, modifiez, puis téléchargez à nouveau.</p></div>', { narrow: true });
+    } catch (e) {
+      console.error(e);
+      setStatus('⚠ Téléchargement impossible');
+      toast('Impossible de préparer le fichier : ' + e.message + '. Utilisez « Exporter la sauvegarde ».', true);
+    }
+  }
+
   /* ---------------- Publication directe en ligne (GitHub → Netlify, gratuit) ---------------- */
   var GH_KEY = '360nature.github';
   var GH_DEFAULT = { owner: 'tristandigital1-code', repo: '-boulangerie-maison-dupont', branch: 'claude/magical-hypatia-w7dh65', dir: '360-degres-nature/public', token: '' };
@@ -1442,7 +1510,7 @@
     var el = e.target.closest('[data-action]');
     if (!el) return;
     var a = el.dataset.action, id = el.dataset.id;
-    var adminActions = /^(edit-|del-|add-|up-|left-|right-|photo-|export|import|reset|help|publish|about-photo|hero-photo|download-template|admin-exit)/;
+    var adminActions = /^(edit-|del-|add-|up-|left-|right-|photo-|export|import|reset|help|publish|save-html|about-photo|hero-photo|download-template|admin-exit)/;
     if (adminActions.test(a) && !isAdmin) return;
     switch (a) {
       case 'admin': isAdmin ? setAdmin(false) : askPin(); break;
@@ -1497,6 +1565,7 @@
       case 'reset': resetLocal(); break;
       case 'help': showHelp(); break;
       case 'publish': openPublish(); break;
+      case 'save-html': saveSiteHtml(); break;
       case 'photo-species': pickPhoto(function (ref) { applyPhoto('species', id, ref); }, true); break;
       case 'photo-obs': pickPhoto(function (ref) { applyPhoto('obs', id, ref); }); break;
       case 'photo-show': pickPhoto(function (ref) { applyPhoto('show', id, ref); }); break;

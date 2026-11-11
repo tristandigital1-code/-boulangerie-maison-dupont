@@ -13,7 +13,7 @@ html = html.replace('<link rel="stylesheet" href="assets/css/style.css">', '<sty
 for js in ('defaults', 'app'):
     code = read('assets/js/%s.js' % js)
     if js == 'defaults': code = inline_imgs(code)
-    html = html.replace('<script src="assets/js/%s.js"></script>' % js, '<script>\n' + code.replace('</script', '<\\/script') + '\n</script>')
+    html = html.replace('<script%s src="assets/js/%s.js"></script>' % (' id="site-data"' if js == 'defaults' else '', js), '<script%s>\n' % (' id="site-data"' if js == 'defaults' else '') + '\n' + code.replace('</script', '<\\/script') + '\n</script>')
 html = re.sub(r'<meta property="og:image"[^>]*>\n', '', html)
 html = inline_imgs(html)
 open('360-degres-nature.html', 'w', encoding='utf-8').write(html)

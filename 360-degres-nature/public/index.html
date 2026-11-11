@@ -267,7 +267,8 @@
 <!-- Barre d'administration -->
 <div class="adminbar" id="adminbar" hidden>
   <span class="adminbar__status" id="saveStatus">Mode édition actif</span>
-  <button type="button" data-action="publish" class="adminbar__publish">🚀 Publier en ligne</button>
+  <button type="button" data-action="save-html" class="adminbar__publish">💾 Télécharger le site modifié</button>
+  <button type="button" data-action="publish">🚀 Publier via GitHub</button>
   <button type="button" data-action="edit-links">Liens &amp; réseaux</button>
   <button type="button" data-action="export">Exporter la sauvegarde (.json)</button>
   <button type="button" data-action="import">Importer une sauvegarde</button>
@@ -302,7 +303,7 @@
   <symbol id="i-link" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M7 17L17 7M9 7h8v8"/></symbol>
 </svg>
 
-<script src="assets/js/defaults.js"></script>
+<script id="site-data" src="assets/js/defaults.js"></script>
 <script src="assets/js/app.js"></script>
 </body>
 </html>
