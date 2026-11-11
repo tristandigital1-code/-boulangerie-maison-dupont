@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>360° Nature — Podcast, fiches espèces &amp; observations de terrain</title>
+  <meta name="description" content="360° Nature par Gabriel Eyler : podcasts naturalistes, fiches espèces présentées dans les épisodes et dernières observations sur le terrain.">
+  <meta name="theme-color" content="#1B3B2B">
+  <link rel="icon" href="assets/img/logo-360-nature.png">
+  <meta property="og:title" content="360° Nature — Explore la nature à 360°">
+  <meta property="og:description" content="Podcasts naturalistes, fiches espèces et observations de terrain.">
+  <meta property="og:image" content="assets/img/hero-martin-pecheur.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav__row">
+    <a href="#accueil" class="brand" aria-label="360° Nature — accueil">
+      <img src="assets/img/logo-360-nature.png" alt="" width="44" height="44">
+      <span><small>Podcast &amp; terrain</small><b>360° Nature</b></span>
+    </a>
+    <nav class="nav__links" aria-label="Navigation principale">
+      <a href="#accueil">Accueil</a>
+      <a href="#podcasts">Les Podcasts</a>
+      <a href="#especes">Fiches Espèces</a>
+      <a href="#observations">Observations</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn--ocre btn--sm nav__cta" href="#ecouter">Écouter le podcast</a>
+    <button class="nav__burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sheet"><span></span></button>
+  </div>
+  <div class="sheet" id="sheet" hidden>
+    <nav aria-label="Navigation mobile">
+      <a href="#accueil"><span>01</span>Accueil &amp; Présentation</a>
+      <a href="#podcasts"><span>02</span>Les Podcasts</a>
+      <a href="#especes"><span>03</span>Fiches Espèces</a>
+      <a href="#observations"><span>04</span>Observations</a>
+      <a href="#contact"><span>05</span>Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ ACCUEIL ============ -->
+<section class="hero" id="accueil" aria-label="Accueil">
+  <div class="hero__bg" id="heroBg" role="img" aria-label="Martin-pêcheur d'Europe perché sur une branche"></div>
+  <div class="wrap hero__inner">
+    <p class="hero__eyebrow"><span class="dot"></span><span data-edit="texts.heroEyebrow"></span></p>
+    <h1 data-edit="texts.heroTitle"></h1>
+    <p class="hero__lead" data-edit="texts.heroLead"></p>
+    <div class="hero__ctas">
+      <a class="btn btn--ocre" href="#ecouter">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+        Écouter le podcast
+      </a>
+      <a class="btn btn--glass" href="#especes">Explorer les fiches espèces</a>
+      <button class="admin-only chip-btn" type="button" data-action="hero-photo">Changer l'image d'accueil</button>
+    </div>
+  </div>
+  <div class="wrap hero__meta">
+    <div><span data-edit="texts.heroMeta1Label"></span><b data-edit="texts.heroMeta1Value"></b></div>
+    <div><span data-edit="texts.heroMeta2Label"></span><b data-edit="texts.heroMeta2Value"></b></div>
+    <div><span data-edit="texts.heroMeta3Label"></span><b data-edit="texts.heroMeta3Value"></b></div>
+  </div>
+</section>
+
+<section class="section about" id="presentation" aria-labelledby="aboutTitle">
+  <div class="wrap about__grid">
+    <figure class="about__media">
+      <div class="about__frame" id="aboutPhoto"></div>
+      <figcaption>
+        <b data-edit="texts.aboutBadgeTitle"></b>
+        <span data-edit="texts.aboutBadgeText"></span>
+      </figcaption>
+      <button class="admin-only chip-btn about__photo-btn" type="button" data-action="about-photo">Changer la photo</button>
+    </figure>
+    <div class="about__body">
+      <p class="eyebrow" data-edit="texts.aboutEyebrow"></p>
+      <h2 class="section-title" id="aboutTitle" data-edit="texts.aboutTitle"></h2>
+      <div class="prose" data-edit="texts.aboutBody" data-multiline></div>
+      <ul class="about__chips" id="aboutChips"></ul>
+    </div>
+  </div>
+  <figure class="wrap quote">
+    <blockquote data-edit="texts.quote"></blockquote>
+    <figcaption data-edit="texts.quoteAuthor"></figcaption>
+  </figure>
+</section>
+
+<!-- ============ PODCASTS ============ -->
+<section class="section podcasts" id="podcasts" aria-labelledby="podTitle">
+  <div class="wrap">
+    <header class="section-head">
+      <div>
+        <p class="eyebrow" data-edit="texts.podEyebrow"></p>
+        <h2 class="section-title" id="podTitle" data-edit="texts.podTitle"></h2>
+      </div>
+      <p class="section-lead" data-edit="texts.podLead"></p>
+    </header>
+
+    <div class="listen" id="ecouter">
+      <div class="listen__intro">
+        <h3 data-edit="texts.listenTitle"></h3>
+        <p data-edit="texts.listenText"></p>
+        <div class="platforms" id="platforms"></div>
+        <button class="admin-only chip-btn" type="button" data-action="edit-links">Modifier les liens des plateformes</button>
+      </div>
+      <div class="listen__player" id="player"></div>
+    </div>
+
+    <h3 class="sub-title">Nos émissions</h3>
+    <div class="shows" id="shows"></div>
+    <button class="admin-only btn btn--outline" type="button" data-action="add-show">+ Ajouter une émission</button>
+
+    <div class="episodes-block">
+      <div class="episodes-head">
+        <h3 class="sub-title">Épisodes &amp; espèces présentées</h3>
+        <button class="admin-only btn btn--outline btn--sm" type="button" data-action="add-episode">+ Ajouter un épisode</button>
+      </div>
+      <ol class="episodes" id="episodes"></ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FICHES ESPÈCES ============ -->
+<section class="section species" id="especes" aria-labelledby="spTitle">
+  <div class="wrap">
+    <header class="section-head">
+      <div>
+        <p class="eyebrow" data-edit="texts.spEyebrow"></p>
+        <h2 class="section-title" id="spTitle" data-edit="texts.spTitle"></h2>
+      </div>
+      <p class="section-lead" data-edit="texts.spLead"></p>
+    </header>
+
+    <div class="admin-only importer" id="importer">
+      <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Importer des fichiers : glisser-déposer ou cliquer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <b>Glissez-déposez plusieurs fichiers ici</b>
+        <span>ou cliquez pour les choisir — Excel/CSV (.xlsx, .xls, .csv), photos (.jpg, .png, .webp), documents (.pdf)</span>
+        <input type="file" id="dropInput" multiple accept=".xlsx,.xls,.csv,.jpg,.jpeg,.png,.webp,.pdf,.txt,.doc,.docx,image/*,application/pdf">
+      </div>
+      <div class="importer__opts">
+        <label>Associer les photos et PDF à :
+          <select id="importTarget"></select>
+        </label>
+        <button class="chip-btn" type="button" data-action="download-template">Télécharger le modèle de tableau (.csv)</button>
+        <button class="btn btn--forest btn--sm" type="button" data-action="add-species">+ Nouvelle fiche</button>
+      </div>
+      <div class="import-report" id="importReport" hidden></div>
+    </div>
+
+    <div class="toolbar">
+      <label class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="spSearch" placeholder="Rechercher une espèce, un nom scientifique, un habitat…" aria-label="Rechercher une espèce">
+      </label>
+      <div class="filters" id="spFilters" role="group" aria-label="Filtrer par groupe"></div>
+    </div>
+    <p class="results-count" id="spCount" aria-live="polite"></p>
+    <div class="species-grid" id="spGrid"></div>
+  </div>
+</section>
+
+<!-- ============ OBSERVATIONS ============ -->
+<section class="section observations" id="observations" aria-labelledby="obsTitle">
+  <div class="wrap">
+    <header class="section-head">
+      <div>
+        <p class="eyebrow" data-edit="texts.obsEyebrow"></p>
+        <h2 class="section-title" id="obsTitle" data-edit="texts.obsTitle"></h2>
+      </div>
+      <div class="obs-side">
+        <p class="obs-stat"><b data-edit="texts.obsStatValue"></b><span data-edit="texts.obsStatLabel"></span></p>
+        <a class="social-pill" data-link="links.instagram" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-instagram"/></svg>
+          Suivre sur Instagram
+        </a>
+      </div>
+    </header>
+    <div class="obs-grid" id="obsGrid"></div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#accueil" class="brand brand--light">
+          <img src="assets/img/logo-360-nature.png" alt="" width="44" height="44">
+          <span><small>Podcast &amp; terrain</small><b>360° Nature</b></span>
+        </a>
+        <p data-edit="texts.footerAbout"></p>
+      </div>
+      <div>
+        <h4>Écouter</h4>
+        <ul id="footListen"></ul>
+      </div>
+      <div>
+        <h4>Explorer</h4>
+        <ul>
+          <li><a href="#presentation">Qui est Gabriel ?</a></li>
+          <li><a href="#podcasts">Les podcasts</a></li>
+          <li><a href="#especes">Fiches espèces</a></li>
+          <li><a href="#observations">Observations de terrain</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li id="footMail"></li>
+          <li><button type="button" class="link-btn" data-action="legal">Mentions légales</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div class="foot-copy">
+        <span data-edit="texts.footerCopy"></span>
+        <small data-edit="texts.footerCredit"></small>
+        <button type="button" class="admin-toggle" data-action="admin" aria-label="Mode édition">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 11V8a4 4 0 018 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+          <span>Mode édition</span>
+        </button>
+      </div>
+      <div class="socials" aria-label="Réseaux sociaux">
+        <a class="social" data-link="links.instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-instagram"/></svg>
+        </a>
+        <a class="social" data-link="links.facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-facebook"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Barre sociale flottante (bas droite) -->
+<div class="dock" aria-label="Réseaux sociaux">
+  <a class="social social--dock" data-link="links.instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-instagram"/></svg>
+  </a>
+  <a class="social social--dock" data-link="links.facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-facebook"/></svg>
+  </a>
+</div>
+
+<!-- Barre d'administration -->
+<div class="adminbar" id="adminbar" hidden>
+  <span class="adminbar__status" id="saveStatus">Mode édition actif</span>
+  <button type="button" data-action="edit-links">Liens &amp; réseaux</button>
+  <button type="button" data-action="export">Exporter la sauvegarde (.json)</button>
+  <button type="button" data-action="import">Importer une sauvegarde</button>
+  <button type="button" data-action="help">Publier en ligne ?</button>
+  <button type="button" data-action="reset">Revenir à la version publiée</button>
+  <button type="button" data-action="admin-exit" class="adminbar__exit">Quitter</button>
+  <input type="file" id="backupInput" accept=".json,application/json" hidden>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal" id="modal" hidden>
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <header class="modal__head">
+      <h3 id="modalTitle"></h3>
+      <button type="button" class="modal__close" data-close aria-label="Fermer">✕</button>
+    </header>
+    <div class="modal__body" id="modalBody"></div>
+  </div>
+</div>
+
+<noscript><p class="noscript">Ce site nécessite JavaScript pour afficher les fiches et observations.</p></noscript>
+
+<!-- Icônes -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1z"/></symbol>
+  <symbol id="i-spotify" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 17.34c-.24.36-.66.48-1.02.24-2.82-1.74-6.36-2.1-10.56-1.14-.42.12-.78-.18-.9-.54-.12-.42.18-.78.54-.9 4.56-1.02 8.52-.6 11.64 1.32.42.18.48.66.3 1.02zm1.44-3.3c-.3.42-.84.6-1.26.3-3.24-1.98-8.16-2.58-11.94-1.38-.48.12-1.02-.12-1.14-.6-.12-.48.12-1.02.6-1.14C9.6 9.9 15 10.56 18.72 12.84c.36.18.54.78.24 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.3c-.6.18-1.2-.18-1.38-.72-.18-.6.18-1.2.72-1.38 4.26-1.26 11.28-1.02 15.72 1.62.54.3.72 1.02.42 1.56-.3.42-1.02.6-1.56.3z"/></symbol>
+  <symbol id="i-apple-podcasts" viewBox="0 0 24 24"><circle cx="12" cy="10" r="2.6" fill="currentColor"/><path fill="currentColor" d="M10.6 14h2.8c.7 0 1.2.6 1.1 1.3l-.7 5.2c-.1.6-.6 1-1.2 1h-1.2c-.6 0-1.1-.4-1.2-1l-.7-5.2c-.1-.7.4-1.3 1.1-1.3z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M7.6 14.6a5.6 5.6 0 118.8 0M5 17.2a9 9 0 1114 0"/></symbol>
+  <symbol id="i-headphones" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 15v-3a8 8 0 0116 0v3"/><rect x="3" y="14" width="5" height="7" rx="2" fill="currentColor"/><rect x="16" y="14" width="5" height="7" rx="2" fill="currentColor"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M5 19c0-8 5-14 15-15-1 10-7 15-15 15zm0 0l8-8"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M7 17L17 7M9 7h8v8"/></symbol>
+</svg>
+
+<script src="assets/js/defaults.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

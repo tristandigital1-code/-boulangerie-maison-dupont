@@ -1,0 +1,224 @@
+/* Contenu par défaut du site 360° Nature.
+ * Sert de secours si data/site-data.json est absent ou illisible.
+ * Le contenu publié réel se trouve dans data/site-data.json (exporté depuis le mode édition). */
+window.DEFAULT_SITE_DATA = {
+  schema: 1,
+  updatedAt: "2026-11-11T00:00:00.000Z",
+
+  links: {
+    spotify: "https://open.spotify.com/show/6PAnhb5Rq2GJF6ACGffCvB?si=G07rBwBMRd6GHymesBZWVA&utm_source=copy-link",
+    apple: "https://podcasts.apple.com/fr/podcast/360-degr%25C3%25A9s-nature/id6833115291",
+    creator: "https://creators.spotify.com/pod/profile/monde-de-la-nature/episodes/ep-e2g2t0v",
+    jpt: "",
+    instagram: "https://instagram.com/360_degres_nature",
+    facebook: "",
+    email: ""
+  },
+
+  texts: {
+    heroEyebrow: "Podcast naturaliste · Carnet de terrain",
+    heroTitle: "Explore la nature à <em>360°</em>.<br>L'histoire de la Terre et du vivant, sans filtre.",
+    heroLead: "Par Gabriel Eyler. Vulgarisation scientifique, podcasts, fiches espèces et observations sur le terrain.",
+    heroMeta1Label: "Terrain d'observation",
+    heroMeta1Value: "48°35'N — Vosges du Nord &amp; forêt de Haguenau",
+    heroMeta2Label: "Espèces référencées",
+    heroMeta2Value: "247 et ça continue",
+    heroMeta3Label: "Écouter",
+    heroMeta3Value: "Spotify · Apple Podcasts",
+
+    aboutEyebrow: "Qui suis-je",
+    aboutTitle: "La science de la nature, <em>tout sauf ennuyeuse</em>.",
+    aboutBody: "<p>Salut&nbsp;! Je m'appelle <b>Gabriel</b>, j'ai <b>19 ans</b>, je suis né près de <b>Strasbourg</b> et je suis <b>photographe naturaliste</b>.</p><p>Passionné par les secrets de notre planète, je passe mon temps à observer les oiseaux, décoder l'histoire de la vie sur Terre et analyser notre impact sur les écosystèmes.</p><p>Entre mes interventions pour le SAMU de l'environnement et mes micros, j'ai créé cet espace pour te partager ma passion — et te prouver que la science de la nature, c'est tout sauf ennuyeux.</p>",
+    aboutBadgeTitle: "360° Nature",
+    aboutBadgeText: "Photographe naturaliste · Alsace &amp; Vosges",
+    aboutChips: "Photographe naturaliste, Ornithologie, Écologie de terrain, Paléontologie, Podcast &amp; radio",
+    quote: "L'homme est si doué pour comprendre les autres de son espèce, alors <em>pourquoi est-il tant indifférent envers les autres êtres vivants&nbsp;?</em>",
+    quoteAuthor: "Gabriel Eyler — À propos du vivant",
+
+    podEyebrow: "L'espace podcast",
+    podTitle: "Les podcasts, <em>un même terrain.</em>",
+    podLead: "Du chant des mésanges aux géants de la Préhistoire : des rendez-vous audio pour comprendre le vivant — et agir.",
+    listenTitle: "Écouter le podcast",
+    listenText: "Choisis ta plateforme préférée : tous les épisodes y sont disponibles gratuitement.",
+
+    spEyebrow: "L'encyclopédie du podcast",
+    spTitle: "Fiches <em>espèces</em>.",
+    spLead: "Chaque espèce présentée dans les épisodes a sa fiche : identification, habitat, anecdotes et lien direct vers l'épisode.",
+
+    obsEyebrow: "Le fil d'observations",
+    obsTitle: "Dernières observations <em>sur le terrain.</em>",
+    obsStatValue: "247 observations",
+    obsStatLabel: "en saison 2026",
+
+    footerAbout: "Vulgarisation scientifique, ornithologie et actions de terrain. Un espace pour comprendre — et protéger — le vivant.",
+    footerCopy: "Protégeons ce que nous apprenons à connaître. © 2026 Gabriel Eyler.",
+    footerCredit: "Site réalisé par tristandigital1@gmail.com",
+    legal: "<p><b>Éditeur du site :</b> Gabriel Eyler — 360° Nature.</p><p><b>Hébergement :</b> Netlify, Inc. — San Francisco, Californie (États-Unis) — netlify.com.</p><p><b>Photographies :</b> toutes les photos sont la propriété de Gabriel Eyler, sauf mention contraire. Toute reproduction sans autorisation est interdite.</p><p><b>Données personnelles :</b> ce site ne dépose aucun cookie publicitaire et ne collecte aucune donnée personnelle. Les lecteurs Spotify intégrés sont soumis aux conditions de Spotify.</p>"
+  },
+
+  aboutPhoto: "assets/img/logo-360-nature.png",
+  heroPhoto: "assets/img/hero-martin-pecheur.jpg",
+
+  podcasts: [
+    {
+      id: "pod-360",
+      title: "360 degrés nature",
+      subtitle: "Podcast · Biodiversité",
+      description: "Ton rendez-vous pour comprendre la biodiversité — des dinosaures aux oiseaux de nos forêts. Format court, anecdotes garanties.",
+      cover: "assets/img/logo-360-nature.png",
+      theme: "forest",
+      links: [
+        { label: "Spotify", url: "@spotify" },
+        { label: "Apple Podcasts", url: "@apple" }
+      ]
+    },
+    {
+      id: "pod-mdn",
+      title: "Monde de la Nature",
+      subtitle: "Podcast · Épisode mis en avant",
+      description: "Découvre l'épisode à la une de Monde de la Nature, directement sur la page créateur Spotify.",
+      cover: "assets/img/obs-guepier-perche.jpg",
+      theme: "sage",
+      links: [
+        { label: "Écouter l'épisode", url: "@creator" }
+      ]
+    },
+    {
+      id: "pod-jpt",
+      title: "JPT | Journey to Prehistoric Time",
+      subtitle: "Podcast · Préhistoire",
+      description: "Un voyage dans les temps préhistoriques : dinosaures, mégafaune disparue et grandes crises du vivant.",
+      cover: "",
+      theme: "ocre",
+      featured: true,
+      links: [
+        { label: "Écouter JPT", url: "@jpt" }
+      ]
+    },
+    {
+      id: "pod-samu",
+      title: "L'environnement et nous",
+      subtitle: "Radio · SAMU de l'environnement",
+      description: "Focus sur l'actualité environnementale et les alertes écologiques sur le terrain : reportages, interviews et décryptages.",
+      cover: "",
+      theme: "anthracite",
+      links: []
+    }
+  ],
+
+  episodes: [
+    {
+      id: "ep-mdn-une",
+      podcastId: "pod-mdn",
+      number: "",
+      title: "Épisode à la une — Monde de la Nature",
+      date: "",
+      url: "https://creators.spotify.com/pod/profile/monde-de-la-nature/episodes/ep-e2g2t0v"
+    }
+  ],
+
+  species: [
+    {
+      id: "sp-guepier",
+      name: "Guêpier d'Europe",
+      latin: "Merops apiaster",
+      group: "Oiseaux",
+      status: "Préoccupation mineure (UICN) · Protégé en France",
+      description: "Oiseau migrateur parmi les plus colorés d'Europe. Il chasse en vol des insectes, surtout des abeilles, guêpes et libellules, et niche en colonies dans des terriers qu'il creuse dans des berges sableuses ou des talus.",
+      habitat: "Milieux ouverts et chauds, carrières, berges de rivières, gravières. Hiverne en Afrique.",
+      fact: "Avant d'avaler une guêpe, il la frotte et la frappe contre une branche pour en retirer l'aiguillon et le venin.",
+      photos: ["assets/img/obs-guepier-perche.jpg", "assets/img/obs-guepier-plongeon.jpg"],
+      docs: [],
+      episodeId: ""
+    },
+    {
+      id: "sp-pic-epeiche",
+      name: "Pic épeiche",
+      latin: "Dendrocopos major",
+      group: "Oiseaux",
+      status: "Préoccupation mineure (UICN) · Protégé en France",
+      description: "Le pic le plus répandu d'Europe, reconnaissable à son plumage noir et blanc et à ses sous-caudales rouges. Il tambourine sur les troncs pour marquer son territoire et creuse chaque année une nouvelle loge.",
+      habitat: "Forêts de feuillus et de conifères, parcs, vergers et grands jardins.",
+      fact: "Il chante peu : au printemps, c'est son tambourinage rapide sur du bois sec et sonore qui lui sert de chant territorial.",
+      photos: ["assets/img/obs-pic-epeiche.jpg"],
+      docs: [],
+      episodeId: ""
+    },
+    {
+      id: "sp-faucon-crecerelle",
+      name: "Faucon crécerelle",
+      latin: "Falco tinnunculus",
+      group: "Oiseaux",
+      status: "Préoccupation mineure (UICN) · Quasi menacé en France",
+      description: "Petit rapace roux très commun, célèbre pour son vol stationnaire au-dessus des prairies. Il se nourrit principalement de campagnols, mais aussi de gros insectes et de lézards.",
+      habitat: "Campagnes ouvertes, prairies, bords de routes, falaises et bâtiments en ville.",
+      fact: "Il fait du « vol du Saint-Esprit » : face au vent, il reste immobile en l'air pour repérer ses proies au sol.",
+      photos: ["assets/img/obs-faucon-crecerelle.jpg"],
+      docs: [],
+      episodeId: ""
+    },
+    {
+      id: "sp-mante",
+      name: "Mante religieuse",
+      latin: "Mantis religiosa",
+      group: "Insectes",
+      status: "Espèce commune, en expansion vers le nord",
+      description: "Insecte prédateur chassant à l'affût grâce à ses pattes antérieures ravisseuses munies d'épines. Sa tête triangulaire très mobile lui permet de regarder par-dessus son « épaule ».",
+      habitat: "Prairies sèches, friches et talus ensoleillés, hautes herbes.",
+      fact: "Sa couleur, verte ou brune, varie d'un individu à l'autre et l'aide à se fondre dans la végétation.",
+      photos: ["assets/img/obs-mante-religieuse.jpg", "assets/img/obs-mante-portrait.jpg"],
+      docs: [],
+      episodeId: ""
+    },
+    {
+      id: "sp-martin-pecheur",
+      name: "Martin-pêcheur d'Europe",
+      latin: "Alcedo atthis",
+      group: "Oiseaux",
+      status: "Préoccupation mineure (UICN) · Vulnérable en France",
+      description: "Petit oiseau bleu et orange qui plonge depuis un perchoir pour capturer de petits poissons. Il creuse son nid au bout d'un tunnel dans une berge meuble.",
+      habitat: "Cours d'eau calmes, étangs et canaux aux eaux claires, bordés de perchoirs.",
+      fact: "Son bec en forme de poignard a inspiré la forme avant du train à grande vitesse japonais Shinkansen pour réduire le bruit.",
+      photos: ["assets/img/hero-martin-pecheur.jpg"],
+      docs: [],
+      episodeId: ""
+    },
+    {
+      id: "sp-corneille",
+      name: "Corneille noire",
+      latin: "Corvus corone",
+      group: "Oiseaux",
+      status: "Préoccupation mineure (UICN)",
+      description: "Corvidé entièrement noir, très adaptable et opportuniste. Les corvidés comptent parmi les oiseaux les plus intelligents : mémoire, résolution de problèmes et vie sociale complexe.",
+      habitat: "Campagnes, lisières, parcs et villes.",
+      fact: "Les corneilles sont capables de reconnaître des visages humains et de s'en souvenir longtemps.",
+      photos: ["assets/img/obs-corneille-noire.jpg"],
+      docs: [],
+      episodeId: ""
+    },
+    {
+      id: "sp-saltique",
+      name: "Saltique (araignée sauteuse)",
+      latin: "Salticidae",
+      group: "Arachnides",
+      status: "Famille très diversifiée — plus de 6 000 espèces",
+      description: "Les saltiques ne tissent pas de toile pour chasser : elles repèrent leurs proies grâce à une vue exceptionnelle, puis bondissent dessus. Elles sont inoffensives pour l'être humain.",
+      habitat: "Murs ensoleillés, sols sableux, végétation basse, écorces.",
+      fact: "Leurs deux grands yeux frontaux leur donnent l'une des meilleures visions de tous les invertébrés ; leur saut est propulsé par une brusque hausse de pression du sang dans les pattes.",
+      photos: ["assets/img/obs-saltique.jpg"],
+      docs: [],
+      episodeId: ""
+    }
+  ],
+
+  observations: [
+    { id: "obs-1", photo: "assets/img/obs-guepier-plongeon.jpg", name: "Guêpier d'Europe", latin: "Merops apiaster", caption: "Plongeon au ras de l'eau, en pleine chasse.", date: "Mars 2026", place: "" },
+    { id: "obs-2", photo: "assets/img/obs-pic-epeiche.jpg", name: "Pic épeiche", latin: "Dendrocopos major", caption: "Accroché au tronc, en quête d'insectes sous l'écorce.", date: "Avril 2026", place: "" },
+    { id: "obs-3", photo: "assets/img/obs-mante-religieuse.jpg", name: "Mante religieuse", latin: "Mantis religiosa", caption: "À l'affût dans les hautes herbes.", date: "Avril 2026", place: "" },
+    { id: "obs-4", photo: "assets/img/obs-corneille-noire.jpg", name: "Corneille noire", latin: "Corvus corone", caption: "Silhouette au coucher du soleil.", date: "Mai 2026", place: "" },
+    { id: "obs-5", photo: "assets/img/obs-faucon-crecerelle.jpg", name: "Faucon crécerelle", latin: "Falco tinnunculus", caption: "Perché sur une tige au printemps.", date: "Mars 2026", place: "" },
+    { id: "obs-6", photo: "assets/img/obs-saltique.jpg", name: "Saltique", latin: "Salticidae", caption: "Petite araignée sauteuse, en macro.", date: "Février 2026", place: "" },
+    { id: "obs-7", photo: "assets/img/obs-guepier-perche.jpg", name: "Guêpier d'Europe", latin: "Merops apiaster", caption: "Perché sur une branche.", date: "Janvier 2026", place: "" },
+    { id: "obs-8", photo: "assets/img/obs-mante-portrait.jpg", name: "Mante religieuse", latin: "Mantis religiosa", caption: "Portrait de face.", date: "", place: "" }
+  ]
+};

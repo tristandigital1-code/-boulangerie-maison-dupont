@@ -1,0 +1,8 @@
+# Site 360° Nature — 100 % statique, aucun build ni serveur requis.
+[build]
+  publish = "public"
+
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "no-cache"
