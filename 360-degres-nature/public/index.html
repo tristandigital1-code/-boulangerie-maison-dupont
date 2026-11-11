@@ -49,7 +49,7 @@
 <main id="main">
 
 <!-- ============ ACCUEIL ============ -->
-<section class="hero" id="accueil" aria-label="Accueil">
+<section class="hero" id="accueil" aria-label="Accueil" data-drop="hero">
   <div class="hero__bg" id="heroBg" role="img" aria-label="Martin-pêcheur d'Europe perché sur une branche"></div>
   <div class="wrap hero__inner">
     <p class="hero__eyebrow"><span class="dot"></span><span data-edit="texts.heroEyebrow"></span></p>
@@ -74,7 +74,7 @@
 <section class="section about" id="presentation" aria-labelledby="aboutTitle">
   <div class="wrap about__grid">
     <figure class="about__media">
-      <div class="about__frame" id="aboutPhoto"></div>
+      <div class="about__frame" id="aboutPhoto" data-drop="about"></div>
       <figcaption>
         <b data-edit="texts.aboutBadgeTitle"></b>
         <span data-edit="texts.aboutBadgeText"></span>
@@ -267,10 +267,11 @@
 <!-- Barre d'administration -->
 <div class="adminbar" id="adminbar" hidden>
   <span class="adminbar__status" id="saveStatus">Mode édition actif</span>
+  <button type="button" data-action="publish" class="adminbar__publish">🚀 Publier en ligne</button>
   <button type="button" data-action="edit-links">Liens &amp; réseaux</button>
   <button type="button" data-action="export">Exporter la sauvegarde (.json)</button>
   <button type="button" data-action="import">Importer une sauvegarde</button>
-  <button type="button" data-action="help">Publier en ligne ?</button>
+  <button type="button" data-action="help">Aide</button>
   <button type="button" data-action="reset">Revenir à la version publiée</button>
   <button type="button" data-action="admin-exit" class="adminbar__exit">Quitter</button>
   <input type="file" id="backupInput" accept=".json,application/json" hidden>

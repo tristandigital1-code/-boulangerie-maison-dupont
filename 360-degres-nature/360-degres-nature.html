@@ -467,6 +467,13 @@ body.admin .dock{bottom:96px}
 .show .admin-tools{z-index:3}
 .platform--jpt[aria-disabled="true"]{border-style:dashed}
 
+/* Publication & photos rapides */
+.adminbar__publish{background:#2f7a4f!important}
+.adminbar__publish:hover{background:#38905d!important}
+body.admin [data-drop]{transition:outline-color .15s}
+body.admin .drop-hover{outline:3px dashed var(--ocre)!important;outline-offset:-6px}
+body.admin .hero .hero__bg.drop-hover{outline-offset:-12px}
+
 </style>
 </head>
 <body>
@@ -503,7 +510,7 @@ body.admin .dock{bottom:96px}
 <main id="main">
 
 <!-- ============ ACCUEIL ============ -->
-<section class="hero" id="accueil" aria-label="Accueil">
+<section class="hero" id="accueil" aria-label="Accueil" data-drop="hero">
   <div class="hero__bg" id="heroBg" role="img" aria-label="Martin-pêcheur d'Europe perché sur une branche"></div>
   <div class="wrap hero__inner">
     <p class="hero__eyebrow"><span class="dot"></span><span data-edit="texts.heroEyebrow"></span></p>
@@ -528,7 +535,7 @@ body.admin .dock{bottom:96px}
 <section class="section about" id="presentation" aria-labelledby="aboutTitle">
   <div class="wrap about__grid">
     <figure class="about__media">
-      <div class="about__frame" id="aboutPhoto"></div>
+      <div class="about__frame" id="aboutPhoto" data-drop="about"></div>
       <figcaption>
         <b data-edit="texts.aboutBadgeTitle"></b>
         <span data-edit="texts.aboutBadgeText"></span>
@@ -721,10 +728,11 @@ body.admin .dock{bottom:96px}
 <!-- Barre d'administration -->
 <div class="adminbar" id="adminbar" hidden>
   <span class="adminbar__status" id="saveStatus">Mode édition actif</span>
+  <button type="button" data-action="publish" class="adminbar__publish">🚀 Publier en ligne</button>
   <button type="button" data-action="edit-links">Liens &amp; réseaux</button>
   <button type="button" data-action="export">Exporter la sauvegarde (.json)</button>
   <button type="button" data-action="import">Importer une sauvegarde</button>
-  <button type="button" data-action="help">Publier en ligne ?</button>
+  <button type="button" data-action="help">Aide</button>
   <button type="button" data-action="reset">Revenir à la version publiée</button>
   <button type="button" data-action="admin-exit" class="adminbar__exit">Quitter</button>
   <input type="file" id="backupInput" accept=".json,application/json" hidden>
@@ -1445,7 +1453,7 @@ window.DEFAULT_SITE_DATA = {
         return '<a class="btn btn--sm ' + (i === 0 ? 'btn--forest' : 'btn--outline') + '" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(l.label) + '</a>';
       }).join('');
       return '<article class="show' + (p.featured ? ' show--feature' : '') + '" style="position:relative">' +
-        adminTools('show', p.id, '<button type="button" data-action="up-show" data-id="' + esc(p.id) + '" title="Monter" aria-label="Monter">↑</button>') +
+        adminTools('show', p.id, '<button type="button" data-action="photo-show" data-id="' + esc(p.id) + '" title="Changer la couverture" aria-label="Changer la couverture">📷</button>' + '<button type="button" data-action="up-show" data-id="' + esc(p.id) + '" title="Monter" aria-label="Monter">↑</button>') +
         '<div class="show__cover t-' + esc(p.theme) + '">' +
           (cover ? '<img src="' + esc(cover) + '" alt="" loading="lazy" data-fallback' + (/logo/.test(p.cover) ? ' class="logo"' : '') + '>' : '<span class="initials">' + esc(initials || '360') + '</span>') +
         '</div>' +
@@ -1519,9 +1527,9 @@ window.DEFAULT_SITE_DATA = {
     }
     grid.innerHTML = list.map(function (s) {
       var e = speciesEpisode(s);
-      return '<article class="sp-card">' +
+      return '<article class="sp-card" data-drop="species" data-id="' + esc(s.id) + '">' +
         '<button type="button" class="stretch" data-action="open-species" data-id="' + esc(s.id) + '" aria-label="Ouvrir la fiche ' + esc(s.name) + '"></button>' +
-        adminTools('species', s.id) +
+        adminTools('species', s.id, '<button type="button" data-action="photo-species" data-id="' + esc(s.id) + '" title="Ajouter des photos" aria-label="Ajouter des photos">📷</button>') +
         '<div class="sp-card__media">' + imgTag(s.photos[0], s.name) +
           '<span class="sp-card__group">' + esc(s.group) + '</span>' +
           (s.photos.length > 1 ? '<span class="sp-card__count">' + s.photos.length + ' photos</span>' : '') + '</div>' +
@@ -1539,10 +1547,11 @@ window.DEFAULT_SITE_DATA = {
     var grid = $('#obsGrid');
     var html = S.observations.map(function (o, i) {
       var dp = [o.date, o.place].filter(Boolean).join(' · ');
-      return '<figure class="obs">' +
+      return '<figure class="obs" data-drop="obs" data-id="' + esc(o.id) + '">' +
         '<button type="button" class="obs__open" data-action="open-obs" data-id="' + esc(o.id) + '" aria-label="Agrandir : ' + esc(o.name) + '">' + imgTag(o.photo, o.name + (o.latin ? ' (' + o.latin + ')' : '')) + '</button>' +
         '<span class="obs__num">N°' + String(i + 1).padStart(2, '0') + '</span>' +
         adminTools('obs', o.id,
+          '<button type="button" data-action="photo-obs" data-id="' + esc(o.id) + '" title="Changer la photo" aria-label="Changer la photo">📷</button>' +
           '<button type="button" data-action="left-obs" data-id="' + esc(o.id) + '" title="Déplacer avant" aria-label="Déplacer avant">←</button>' +
           '<button type="button" data-action="right-obs" data-id="' + esc(o.id) + '" title="Déplacer après" aria-label="Déplacer après">→</button>') +
         '<figcaption><b>' + esc(o.name) + '</b>' + (o.latin ? '<i>' + esc(o.latin) + '</i>' : '') + (dp ? '<small>' + esc(dp) + '</small>' : '') + '</figcaption>' +
@@ -1820,16 +1829,36 @@ window.DEFAULT_SITE_DATA = {
     });
   }
 
-  function pickPhoto(cb) {
+  function pickPhoto(cb, multiple) {
     var inp = document.createElement('input');
-    inp.type = 'file'; inp.accept = 'image/*';
+    inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = !!multiple;
     inp.addEventListener('change', async function () {
-      var f = inp.files && inp.files[0];
-      if (!f) return;
-      try { cb(await storeImage(f)); }
-      catch (e) { toast('Image illisible : ' + f.name, true); }
+      var files = Array.prototype.slice.call(inp.files || []);
+      for (var i = 0; i < files.length; i++) {
+        try { cb(await storeImage(files[i])); }
+        catch (e) { toast('Image illisible : ' + files[i].name, true); }
+      }
     });
     inp.click();
+  }
+  // Remplace / ajoute une photo directement depuis la page (bouton 📷 ou glisser-déposer)
+  function applyPhoto(kind, id, ref) {
+    if (kind === 'species') {
+      var s = S.species.find(function (x) { return x.id === id; });
+      if (!s) return;
+      s.photos.unshift(ref); renderSpecies(); toast('Photo ajoutée à « ' + s.name + ' » (photo principale).');
+    } else if (kind === 'obs') {
+      var o = S.observations.find(function (x) { return x.id === id; });
+      if (!o) return;
+      o.photo = ref; renderObservations(); toast('Photo de « ' + o.name + ' » remplacée.');
+    } else if (kind === 'show') {
+      var p = S.podcasts.find(function (x) { return x.id === id; });
+      if (!p) return;
+      p.cover = ref; renderShows(); toast('Couverture remplacée.');
+    } else if (kind === 'about') { S.aboutPhoto = ref; renderTexts(); toast('Photo de présentation remplacée.'); }
+    else if (kind === 'hero') { S.heroPhoto = ref; renderTexts(); toast('Image d\'accueil remplacée.'); }
+    else return;
+    persist(); gcMedia();
   }
 
   // Émissions
@@ -2310,12 +2339,106 @@ window.DEFAULT_SITE_DATA = {
       '<p>Astuce : gardez toujours une copie de vos exports. Sur un autre appareil, utilisez « Importer une sauvegarde » pour retrouver votre travail.</p></div>');
   }
 
+  /* ---------------- Publication directe en ligne (GitHub → Netlify, gratuit) ---------------- */
+  var GH_KEY = '360nature.github';
+  var GH_DEFAULT = { owner: 'tristandigital1-code', repo: '-boulangerie-maison-dupont', branch: 'claude/magical-hypatia-w7dh65', dir: '360-degres-nature/public', token: '' };
+  function ghConf() {
+    var c = {};
+    try { c = JSON.parse(lsGet(GH_KEY) || '{}') || {}; } catch (e) { c = {}; }
+    return Object.assign({}, GH_DEFAULT, c);
+  }
+  async function gh(conf, method, path, body) {
+    var r = await fetch('https://api.github.com/repos/' + encodeURIComponent(conf.owner) + '/' + encodeURIComponent(conf.repo) + path, {
+      method: method,
+      headers: { 'Authorization': 'Bearer ' + conf.token, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: body ? JSON.stringify(body) : undefined
+    });
+    if (!r.ok) {
+      var msg = 'erreur ' + r.status;
+      if (r.status === 401) msg = 'clé d\'accès GitHub invalide ou expirée';
+      else if (r.status === 403) msg = 'la clé n\'a pas le droit d\'écrire dans ce dépôt (permission « Contents : Read and write »)';
+      else if (r.status === 404) msg = 'dépôt ou branche introuvable (vérifiez les réglages)';
+      else if (r.status === 409 || r.status === 422) msg = 'conflit avec une autre publication, réessayez';
+      throw new Error(msg);
+    }
+    return r.status === 204 ? null : r.json();
+  }
+  function b64ofBlob(blob) { return blobToDataURL(blob).then(function (d) { return d.slice(d.indexOf(',') + 1); }); }
+  function b64ofText(t) { var b = new TextEncoder().encode(t), s = ''; for (var i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000)); return btoa(s); }
+  var EXT = { 'image/webp': 'webp', 'image/jpeg': 'jpg', 'image/png': 'png', 'image/gif': 'gif', 'application/pdf': 'pdf', 'text/plain': 'txt' };
+
+  async function publishOnline(conf, progress) {
+    if (!conf.token) throw new Error('renseignez d\'abord votre clé d\'accès GitHub');
+    var dir = conf.dir.replace(/^\/+|\/+$/g, '');
+    var pre = dir ? dir + '/' : '';
+    var branch = encodeURIComponent(conf.branch).replace(/%2F/g, '/');
+    var published = {};
+    try { published = (await DB.get('kv', 'published')) || {}; } catch (e) { published = {}; }
+    progress('Connexion à GitHub…');
+    var ref = await gh(conf, 'GET', '/git/ref/heads/' + branch);
+    var base = await gh(conf, 'GET', '/git/commits/' + ref.object.sha);
+    var data = clone(S), tree = [], ids = Array.from(collectRefs(S)), done = 0;
+    for (var i = 0; i < ids.length; i++) {
+      var id = ids[i];
+      if (published[id]) continue;
+      var rec = await getMediaRec('idb:' + id);
+      if (!rec || !rec.blob) continue;
+      progress('Envoi des fichiers… ' + (++done));
+      var ext = EXT[rec.blob.type] || ((rec.name || '').split('.').pop() || 'bin').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 5) || 'bin';
+      var rel = 'data/media/' + id + '.' + ext;
+      var blob = await gh(conf, 'POST', '/git/blobs', { content: await b64ofBlob(rec.blob), encoding: 'base64' });
+      tree.push({ path: pre + rel, mode: '100644', type: 'blob', sha: blob.sha });
+      published[id] = rel;
+    }
+    await mapStringsAsync(data, async function (s) { return s.indexOf('idb:') === 0 ? (published[s.slice(4)] || '') : s; });
+    progress('Envoi du contenu du site…');
+    var json = await gh(conf, 'POST', '/git/blobs', { content: b64ofText(JSON.stringify(data, null, 1)), encoding: 'base64' });
+    tree.push({ path: pre + 'data/site-data.json', mode: '100644', type: 'blob', sha: json.sha });
+    var t = await gh(conf, 'POST', '/git/trees', { base_tree: base.tree.sha, tree: tree });
+    var c = await gh(conf, 'POST', '/git/commits', { message: 'Mise à jour du site depuis le mode édition (' + new Date().toLocaleString('fr-FR') + ')', tree: t.sha, parents: [ref.object.sha] });
+    await gh(conf, 'PATCH', '/git/refs/heads/' + branch, { sha: c.sha });
+    try { await DB.put('kv', 'published', published); } catch (e) { /* */ }
+    lsSet('360nature.lastPublish', new Date().toISOString());
+  }
+
+  function openPublish() {
+    var c = ghConf(), last = lsGet('360nature.lastPublish');
+    var body = openModal('Publier en ligne', '<form class="form">' +
+      '<p class="full" style="margin:0">Un clic envoie vos textes, fiches, photos et PDF sur GitHub ; Netlify met le site à jour automatiquement (environ 1 minute), gratuitement.' +
+      (last ? '<br><small style="color:var(--ink-soft)">Dernière publication : ' + esc(new Date(last).toLocaleString('fr-FR')) + '</small>' : '') + '</p>' +
+      field('Clé d\'accès GitHub (token)', 'token', c.token, { type: 'password', full: true, hint: 'Enregistrée uniquement sur cet appareil. À créer une seule fois : voir « Comment obtenir la clé ? » ci-dessous.' }) +
+      '<details class="full"><summary style="cursor:pointer;font-weight:600;color:var(--forest)">Comment obtenir la clé ? / Réglages avancés</summary><div class="help" style="margin-top:10px"><ol>' +
+        '<li>Sur GitHub : photo de profil → <b>Settings</b> → <b>Developer settings</b> → <b>Personal access tokens</b> → <b>Fine-grained tokens</b> → <b>Generate new token</b>.</li>' +
+        '<li>« Repository access » : <b>Only select repositories</b> → choisissez <code>' + esc(c.repo) + '</code>.</li>' +
+        '<li>« Permissions » → <b>Contents : Read and write</b>. Générez, copiez la clé et collez-la ci-dessus.</li>' +
+        '<li>Sur Netlify (une seule fois) : <b>Add new site</b> → <b>Import an existing project</b> → GitHub → ce dépôt, branche <code>' + esc(c.branch) + '</code>, <i>Base directory</i> <code>360-degres-nature</code>.</li></ol></div>' +
+        '<div class="form" style="margin-top:6px">' + field('Compte GitHub', 'owner', c.owner) + field('Dépôt', 'repo', c.repo) + field('Branche', 'branch', c.branch) + field('Dossier du site', 'dir', c.dir) + '</div></details>' +
+      '<p class="full err" data-pub-msg style="margin:0;font-weight:600"></p>' +
+      '<div class="form__actions"><button type="button" class="btn btn--outline btn--sm" data-close>Fermer</button>' +
+      '<button type="submit" class="btn btn--ocre">🚀 Publier maintenant</button></div></form>');
+    var form = $('form', body), msg = $('[data-pub-msg]', body), btn = $('button[type=submit]', body);
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var conf = { token: form.token.value.trim(), owner: form.owner.value.trim(), repo: form.repo.value.trim(), branch: form.branch.value.trim(), dir: form.dir.value.trim() };
+      lsSet(GH_KEY, JSON.stringify(conf));
+      btn.disabled = true; msg.style.color = 'var(--forest)';
+      try {
+        await publishOnline(conf, function (t) { msg.textContent = t; setStatus(t); });
+        msg.textContent = '✓ Publié ! Le site en ligne sera à jour dans environ 1 minute.';
+        setStatus('✓ Publié en ligne'); toast('Publié ! Le site en ligne sera à jour dans environ 1 minute.');
+      } catch (err) {
+        msg.style.color = '#9b3b2a'; msg.textContent = 'Publication impossible : ' + err.message + '.';
+        setStatus('⚠ Publication échouée');
+      } finally { btn.disabled = false; }
+    });
+  }
+
   /* ---------------- Interactions globales ---------------- */
   function onAction(e) {
     var el = e.target.closest('[data-action]');
     if (!el) return;
     var a = el.dataset.action, id = el.dataset.id;
-    var adminActions = /^(edit-|del-|add-|up-|left-|right-|export|import|reset|help|about-photo|hero-photo|download-template|admin-exit)/;
+    var adminActions = /^(edit-|del-|add-|up-|left-|right-|photo-|export|import|reset|help|publish|about-photo|hero-photo|download-template|admin-exit)/;
     if (adminActions.test(a) && !isAdmin) return;
     switch (a) {
       case 'admin': isAdmin ? setAdmin(false) : askPin(); break;
@@ -2334,8 +2457,8 @@ window.DEFAULT_SITE_DATA = {
       })(); break;
       case 'edit-links': editLinks(); break;
       case 'edit-chips': editChips(); break;
-      case 'about-photo': pickPhoto(function (ref) { S.aboutPhoto = ref; persist(); renderTexts(); gcMedia(); }); break;
-      case 'hero-photo': pickPhoto(function (ref) { S.heroPhoto = ref; persist(); renderTexts(); gcMedia(); }); break;
+      case 'about-photo': pickPhoto(function (ref) { applyPhoto('about', null, ref); }); break;
+      case 'hero-photo': pickPhoto(function (ref) { applyPhoto('hero', null, ref); }); break;
       case 'add-show': editShow(null); break;
       case 'edit-show': editShow(id); break;
       case 'del-show': confirmBox('Supprimer cette émission ?', 'Supprimer').then(function (ok) {
@@ -2369,6 +2492,10 @@ window.DEFAULT_SITE_DATA = {
       case 'import': $('#backupInput').click(); break;
       case 'reset': resetLocal(); break;
       case 'help': showHelp(); break;
+      case 'publish': openPublish(); break;
+      case 'photo-species': pickPhoto(function (ref) { applyPhoto('species', id, ref); }, true); break;
+      case 'photo-obs': pickPhoto(function (ref) { applyPhoto('obs', id, ref); }); break;
+      case 'photo-show': pickPhoto(function (ref) { applyPhoto('show', id, ref); }); break;
     }
   }
 
@@ -2462,6 +2589,25 @@ window.DEFAULT_SITE_DATA = {
     // Évite d'ouvrir un fichier lâché à côté de la zone
     window.addEventListener('dragover', function (e) { e.preventDefault(); });
     window.addEventListener('drop', function (e) { e.preventDefault(); });
+    // Mode édition : glisser une photo directement sur une fiche, une observation, l'accueil ou la présentation
+    document.addEventListener('dragover', function (e) {
+      var z = isAdmin && e.target.closest && e.target.closest('[data-drop]');
+      $$('.drop-hover').forEach(function (x) { if (x !== z) x.classList.remove('drop-hover'); });
+      if (z) z.classList.add('drop-hover');
+    });
+    document.addEventListener('dragleave', function (e) { if (!e.relatedTarget) $$('.drop-hover').forEach(function (x) { x.classList.remove('drop-hover'); }); });
+    document.addEventListener('drop', async function (e) {
+      $$('.drop-hover').forEach(function (x) { x.classList.remove('drop-hover'); });
+      var z = isAdmin && e.target.closest && e.target.closest('[data-drop]');
+      if (!z || !e.dataTransfer) return;
+      e.preventDefault(); e.stopPropagation();
+      var imgs = Array.prototype.filter.call(e.dataTransfer.files, function (f) { return /^image\//.test(f.type) || /\.(jpe?g|png|webp)$/i.test(f.name); });
+      if (!imgs.length) return toast('Déposez une image (JPG, PNG ou WebP).', true);
+      for (var i = 0; i < (z.dataset.drop === 'species' ? imgs.length : 1); i++) {
+        try { applyPhoto(z.dataset.drop, z.dataset.id, await storeImage(imgs[i])); }
+        catch (err) { toast('Image illisible : ' + imgs[i].name, true); }
+      }
+    });
 
     $('#backupInput').addEventListener('change', function (e) {
       var f = e.target.files && e.target.files[0];

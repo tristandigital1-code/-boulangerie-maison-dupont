@@ -451,3 +451,10 @@ body.admin .dock{bottom:96px}
 .sp-card .stretch:focus-visible{outline-offset:-3px}
 .show .admin-tools{z-index:3}
 .platform--jpt[aria-disabled="true"]{border-style:dashed}
+
+/* Publication & photos rapides */
+.adminbar__publish{background:#2f7a4f!important}
+.adminbar__publish:hover{background:#38905d!important}
+body.admin [data-drop]{transition:outline-color .15s}
+body.admin .drop-hover{outline:3px dashed var(--ocre)!important;outline-offset:-6px}
+body.admin .hero .hero__bg.drop-hover{outline-offset:-12px}
