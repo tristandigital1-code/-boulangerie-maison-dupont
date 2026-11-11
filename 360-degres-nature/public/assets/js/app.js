@@ -295,6 +295,7 @@
       aboutPhoto: isStr(d.aboutPhoto) ? d.aboutPhoto : D.aboutPhoto,
       heroPhoto: isStr(d.heroPhoto) ? d.heroPhoto : (D.heroPhoto || 'assets/img/hero-martin-pecheur.jpg')
     };
+    if (/6PAnhb5Rq2GJF6ACGffCvB/.test(out.links.spotify)) { if (!out.links.jpt) out.links.jpt = out.links.spotify; out.links.spotify = ''; }
     out.podcasts = uniqIds(arr(d.podcasts, D.podcasts).map(function (p) {
       if (!p || typeof p !== 'object') return null;
       return {
@@ -389,7 +390,7 @@
     });
     // Footer « Écouter »
     var L = S.links, items = [
-      ['spotify', 'Spotify'], ['apple', 'Apple Podcasts'], ['creator', 'Monde de la Nature'], ['jpt', 'JPT | Journey to Prehistoric Time']
+      ['spotify', '360° Nature — Spotify'], ['apple', '360° Nature — Apple Podcasts'], ['jpt', 'JPT | Journey to Prehistoric Time'], ['creator', 'Monde de la Nature']
     ].filter(function (x) { return safeUrl(L[x[0]]); });
     $('#footListen').innerHTML = items.map(function (x) {
       return '<li><a href="' + esc(safeUrl(L[x[0]])) + '" target="_blank" rel="noopener noreferrer">' + esc(x[1]) +
@@ -402,32 +403,38 @@
   }
 
   var PLATFORMS = [
-    { key: 'spotify', cls: 'platform--spotify', icon: 'i-spotify', small: 'Écouter sur', label: 'Spotify' },
-    { key: 'apple', cls: 'platform--apple', icon: 'i-apple-podcasts', small: 'Écouter sur', label: 'Apple Podcasts' },
-    { key: 'creator', cls: 'platform--creator', icon: 'i-spotify', small: 'Épisode à la une · Spotify for Creators', label: 'Monde de la Nature' },
-    { key: 'jpt', cls: 'platform--jpt', icon: 'i-headphones', small: 'Podcast Préhistoire', label: 'JPT | Journey to Prehistoric Time' }
+    { key: 'spotify', cls: 'platform--spotify', icon: 'i-spotify', small: '360° Nature sur', label: 'Spotify', optional: true },
+    { key: 'apple', cls: 'platform--apple', icon: 'i-apple-podcasts', small: '360° Nature sur', label: 'Apple Podcasts' },
+    { key: 'jpt', cls: 'platform--spotify', icon: 'i-spotify', small: 'Podcast Préhistoire · Spotify', label: 'JPT | Journey to Prehistoric Time' },
+    { key: 'creator', cls: 'platform--creator', icon: 'i-spotify', small: 'Épisode à la une · Spotify for Creators', label: 'Monde de la Nature' }
   ];
   function renderPlatforms() {
-    $('#platforms').innerHTML = PLATFORMS.map(function (p) {
+    $('#platforms').innerHTML = PLATFORMS.filter(function (p) { return !p.optional || safeUrl(S.links[p.key]) || isAdmin; }).map(function (p) {
       var u = safeUrl(S.links[p.key]);
-      var logo = '<span class="platform__logo"' + (p.key === 'jpt' ? ' style="background:var(--ocre);color:#fff"' : '') + '><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#' + p.icon + '"/></svg></span>';
+      var logo = '<span class="platform__logo"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#' + p.icon + '"/></svg></span>';
       var txt = '<span><small>' + esc(u ? p.small : p.small + ' · lien bientôt disponible') + '</small><b>' + esc(p.label) + '</b></span>';
       if (!u) return '<div class="platform ' + p.cls + '" aria-disabled="true" style="opacity:.7;cursor:default">' + logo + txt + '</div>';
       return '<a class="platform ' + p.cls + '" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + logo + txt +
         '<svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-link"/></svg></a>';
     }).join('');
 
+    // Lecteur mis en avant : 360° Nature (Spotify si renseigné, sinon Apple Podcasts)
     var m = /open\.spotify\.com\/(?:intl-[a-z]+\/)?(show|episode)\/([A-Za-z0-9]+)/.exec(S.links.spotify || '');
-    var player = $('#player');
+    var a = /podcasts\.apple\.com\/([a-z]{2})\/podcast\/(?:[^/?#]+\/)?id(\d+)/.exec(S.links.apple || '');
+    var player = $('#player'), embed = '', iframe = '';
     if (m) {
-      var embed = 'https://open.spotify.com/embed/' + m[1] + '/' + m[2] + '?utm_source=generator&theme=0';
-      var cur = player.querySelector('iframe');
-      if (!cur || cur.getAttribute('src') !== embed) {
-        player.innerHTML = '<iframe src="' + esc(embed) + '" title="Lecteur Spotify du podcast" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
-      }
-    } else {
-      player.innerHTML = '<div class="player-fallback"><p>Le lecteur intégré apparaîtra ici dès qu\'un lien Spotify d\'émission ou d\'épisode sera renseigné.</p></div>';
+      embed = 'https://open.spotify.com/embed/' + m[1] + '/' + m[2] + '?utm_source=generator&theme=0';
+      iframe = '<iframe src="' + esc(embed) + '" title="Lecteur Spotify — 360° Nature" loading="lazy" style="height:352px" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
+    } else if (a) {
+      embed = 'https://embed.podcasts.apple.com/' + a[1] + '/podcast/360-degres-nature/id' + a[2] + '?theme=dark';
+      iframe = '<iframe src="' + esc(embed) + '" title="Lecteur Apple Podcasts — 360° Nature" loading="lazy" style="height:450px" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"></iframe>';
     }
+    var cur = player.querySelector('iframe');
+    if (!iframe) player.innerHTML = '<div class="player-fallback"><p>Le lecteur apparaîtra ici dès qu\'un lien Spotify ou Apple Podcasts de 360° Nature sera renseigné.</p></div>';
+    else if (!cur || cur.getAttribute('src') !== embed) player.innerHTML = iframe;
+    $('#featureLinks').innerHTML = [['spotify', 'Écouter sur Spotify', 'btn--ocre'], ['apple', 'Écouter sur Apple Podcasts', 'btn--glass']]
+      .filter(function (x) { return safeUrl(S.links[x[0]]); })
+      .map(function (x) { return '<a class="btn btn--sm ' + x[2] + '" href="' + esc(safeUrl(S.links[x[0]])) + '" target="_blank" rel="noopener noreferrer">' + x[1] + '</a>'; }).join('');
   }
 
   function adminTools(kind, id, extra) {
@@ -441,10 +448,11 @@
     if (!S.podcasts.length) { el.innerHTML = '<div class="empty">Aucune émission pour le moment.</div>'; return; }
     el.innerHTML = S.podcasts.map(function (p) {
       var cover = src(safeImgRef(p.cover));
+      var anyLink = p.links.some(function (l) { return linkOf(l.url); });
       var initials = p.title.replace(/[^A-Za-zÀ-ÿ0-9 |]/g, '').split(/[\s|]+/).filter(Boolean).slice(0, 3).map(function (w) { return w[0]; }).join('').toUpperCase();
       var links = p.links.map(function (l, i) {
         var u = linkOf(l.url);
-        if (!u) return '<span class="badge-soon">' + esc(l.label) + ' · lien bientôt disponible</span>';
+        if (!u) return anyLink ? '' : '<span class="badge-soon">' + esc(l.label) + ' · lien bientôt disponible</span>';
         return '<a class="btn btn--sm ' + (i === 0 ? 'btn--forest' : 'btn--outline') + '" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(l.label) + '</a>';
       }).join('');
       return '<article class="show' + (p.featured ? ' show--feature' : '') + '" style="position:relative">' +
@@ -790,10 +798,10 @@
   function editLinks() {
     var L = S.links;
     var body = openModal('Liens, podcasts & réseaux sociaux', '<form class="form">' +
-      field('Spotify — page du podcast', 'spotify', L.spotify, { full: true, hint: 'Le lecteur intégré utilise ce lien (émission ou épisode).' }) +
-      field('Apple Podcasts', 'apple', L.apple, { full: true }) +
+      field('Spotify — 360° Nature', 'spotify', L.spotify, { full: true, hint: 'Lecteur mis en avant. Laisser vide = lecteur Apple Podcasts.' }) +
+      field('Apple Podcasts — 360° Nature', 'apple', L.apple, { full: true }) +
       field('Monde de la Nature — épisode à la une (Spotify for Creators)', 'creator', L.creator, { full: true }) +
-      field('JPT | Journey to Prehistoric Time', 'jpt', L.jpt, { full: true, placeholder: 'https://… (laisser vide = « bientôt disponible »)' }) +
+      field('JPT | Journey to Prehistoric Time (Spotify)', 'jpt', L.jpt, { full: true }) +
       field('Instagram', 'instagram', L.instagram) +
       field('Facebook', 'facebook', L.facebook, { placeholder: 'https://www.facebook.com/…' }) +
       field('E-mail de contact (facultatif)', 'email', L.email, { type: 'email', full: true }) +
@@ -836,7 +844,7 @@
   }
 
   // Émissions
-  var LINK_SOURCES = [['@spotify', 'Lien Spotify du podcast'], ['@apple', 'Lien Apple Podcasts'], ['@creator', 'Lien Monde de la Nature'], ['@jpt', 'Lien JPT'], ['', 'Autre lien (à saisir)']];
+  var LINK_SOURCES = [['@spotify', 'Lien Spotify 360° Nature'], ['@apple', 'Lien Apple Podcasts 360° Nature'], ['@creator', 'Lien Monde de la Nature'], ['@jpt', 'Lien JPT'], ['', 'Autre lien (à saisir)']];
   function linkRow(l) {
     var srcVal = l && l.url && l.url.charAt(0) === '@' ? l.url : '';
     return '<div class="link-row">' +

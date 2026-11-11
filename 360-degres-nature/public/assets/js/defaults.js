@@ -6,10 +6,10 @@ window.DEFAULT_SITE_DATA = {
   updatedAt: "2026-11-11T00:00:00.000Z",
 
   links: {
-    spotify: "https://open.spotify.com/show/6PAnhb5Rq2GJF6ACGffCvB?si=G07rBwBMRd6GHymesBZWVA&utm_source=copy-link",
+    spotify: "",
     apple: "https://podcasts.apple.com/fr/podcast/360-degr%25C3%25A9s-nature/id6833115291",
     creator: "https://creators.spotify.com/pod/profile/monde-de-la-nature/episodes/ep-e2g2t0v",
-    jpt: "",
+    jpt: "https://open.spotify.com/show/6PAnhb5Rq2GJF6ACGffCvB?si=G07rBwBMRd6GHymesBZWVA&utm_source=copy-link",
     instagram: "https://instagram.com/360_degres_nature",
     facebook: "",
     email: ""
@@ -40,6 +40,9 @@ window.DEFAULT_SITE_DATA = {
     podLead: "Du chant des mésanges aux géants de la Préhistoire : des rendez-vous audio pour comprendre le vivant — et agir.",
     listenTitle: "Écouter le podcast",
     listenText: "Choisis ta plateforme préférée : tous les épisodes y sont disponibles gratuitement.",
+    featureEyebrow: "À la une",
+    featureTitle: "360° Nature",
+    featureText: "Le podcast principal : la biodiversité, des dinosaures aux oiseaux de nos forêts. Lance un épisode directement ici.",
 
     spEyebrow: "L'encyclopédie du podcast",
     spTitle: "Fiches <em>espèces</em>.",
