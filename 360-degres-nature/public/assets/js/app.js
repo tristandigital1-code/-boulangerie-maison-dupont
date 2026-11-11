@@ -390,7 +390,7 @@
     });
     // Footer « Écouter »
     var L = S.links, items = [
-      ['spotify', '360° Nature — Spotify'], ['apple', '360° Nature — Apple Podcasts'], ['jpt', 'JPT | Journey to Prehistoric Time'], ['creator', 'Monde de la Nature']
+      ['spotify', '360° Nature — Spotify'], ['apple', '360° Nature — Apple Podcasts'], ['creator', 'Monde de la Nature'], ['jpt', 'JPT | Journey to Prehistoric Time']
     ].filter(function (x) { return safeUrl(L[x[0]]); });
     $('#footListen').innerHTML = items.map(function (x) {
       return '<li><a href="' + esc(safeUrl(L[x[0]])) + '" target="_blank" rel="noopener noreferrer">' + esc(x[1]) +
@@ -405,8 +405,8 @@
   var PLATFORMS = [
     { key: 'spotify', cls: 'platform--spotify', icon: 'i-spotify', small: '360° Nature sur', label: 'Spotify', optional: true },
     { key: 'apple', cls: 'platform--apple', icon: 'i-apple-podcasts', small: '360° Nature sur', label: 'Apple Podcasts' },
-    { key: 'jpt', cls: 'platform--spotify', icon: 'i-spotify', small: 'Podcast Préhistoire · Spotify', label: 'JPT | Journey to Prehistoric Time' },
-    { key: 'creator', cls: 'platform--creator', icon: 'i-spotify', small: 'Épisode à la une · Spotify for Creators', label: 'Monde de la Nature' }
+    { key: 'creator', cls: 'platform--creator', icon: 'i-spotify', small: 'Épisode à la une · Spotify for Creators', label: 'Monde de la Nature' },
+    { key: 'jpt', cls: 'platform--spotify', icon: 'i-spotify', small: 'Podcast Préhistoire · Spotify', label: 'JPT | Journey to Prehistoric Time' }
   ];
   function renderPlatforms() {
     $('#platforms').innerHTML = PLATFORMS.filter(function (p) { return !p.optional || safeUrl(S.links[p.key]) || isAdmin; }).map(function (p) {
@@ -449,7 +449,8 @@
     el.innerHTML = S.podcasts.map(function (p) {
       var cover = src(safeImgRef(p.cover));
       var anyLink = p.links.some(function (l) { return linkOf(l.url); });
-      var initials = p.title.replace(/[^A-Za-zÀ-ÿ0-9 |]/g, '').split(/[\s|]+/).filter(Boolean).slice(0, 3).map(function (w) { return w[0]; }).join('').toUpperCase();
+      var abbr = p.title.split('|')[0].trim();
+      var initials = p.title.indexOf('|') > 0 && abbr.length <= 5 ? abbr.toUpperCase() : p.title.replace(/[^A-Za-zÀ-ÿ0-9 |]/g, '').split(/[\s|]+/).filter(Boolean).slice(0, 3).map(function (w) { return w[0]; }).join('').toUpperCase();
       var links = p.links.map(function (l, i) {
         var u = linkOf(l.url);
         if (!u) return anyLink ? '' : '<span class="badge-soon">' + esc(l.label) + ' · lien bientôt disponible</span>';
